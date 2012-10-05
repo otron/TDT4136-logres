@@ -1,11 +1,9 @@
 # Eclipse stuff #
-#################
 .metadata/*
 *.project
-.settings/*
+*/.settings/*
 *.classpath
 
 
 # Compiled source #
-###################
 *.class
