@@ -18,11 +18,12 @@ public class EggCarton extends SimAlState {
 		this.M = M;
 		this.N = N;
 	}
-	public EggCarton(int[][] grid, int K) {
-		this.grid = grid;
+	public EggCarton(int[][] grid, int K, ArrayList<int[]> eggLocations) {
 		this.K = K;
 		this.M = grid.length;
 		this.N = grid[0].length;
+		this.grid = new int[this.M][this.N];
+		this.eggLocs = eggLocations;
 		this.update();
 		this.fill();
 	}
@@ -35,7 +36,7 @@ public class EggCarton extends SimAlState {
 	}
 	public void fill() {
 		//fills the grid with eggs, whooo!
-		while (this.isFilled() == false) {
+		while (!this.isFilled()) {
 			this.placeAnEgg();
 		}
 	}
@@ -137,8 +138,24 @@ public class EggCarton extends SimAlState {
 	}
 	@Override
 	public PriorityQueue<SimAlState> generateNeighbours(int n) {
+		//n is the number of neighbours to generate
+		double perc = 1.0/3.0; //percentage of placed eggs to remove
+		int eggsToRemove = (int) (this.eggLocs.size() * (perc));
+		if (eggsToRemove < 1)
+			eggsToRemove = 1;
+		Random rng = new Random();
+		PriorityQueue<SimAlState> res = new PriorityQueue<SimAlState>();
+		//need to create a copy of this' egg locations
+		ArrayList<int[]> temp = new ArrayList<int[]>();
+		for (int[] i : this.eggLocs)
+			temp.add(i);
+		//now we remove at least eggsToRemove eggs
+		for (int i = 0; i < eggsToRemove; i++)
+			temp.remove(rng.nextInt(temp.size()));
 		
-		// TODO Auto-generated method stub
-		return null;
+		//now we need to create n new solutions from the reduced version of this
+		for (int i = 0; i < n; i++)
+			res.add(new EggCarton(this.grid, this.K, temp));
+		return res;
 	}
 }
