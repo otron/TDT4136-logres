@@ -29,6 +29,18 @@ public class SimAl {
 		this.rng = new Random();
 	}
 	
+	public static void main(String args[]) {
+		int[] derp = new int[10];
+		for (int i : derp) {
+			System.out.print(i +", ");
+			i = 2;
+		}
+		System.out.println();
+		for (int i : derp) {
+			System.out.print(i + ", ");
+		}
+	}
+	
 	
 	public void dueProcess() {
 		//haha am I the wittiest fellow ever or what?
