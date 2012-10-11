@@ -13,10 +13,16 @@ public class EggCarton extends SimAlState {
 	
 	
 	public EggCarton(int M, int N, int K) {
-		this.grid = new int[M][N];
+		if (M >= N) {
+			this.M = M;
+			this.N = N;
+		} else {
+			this.M = N;
+			this.N = M;
+		}
+		this.grid = new int[this.M][this.N];
 		this.K = K;
-		this.M = M;
-		this.N = N;
+		this.eggLocs = new ArrayList<int[]>();
 	}
 	public EggCarton(int[][] grid, int K, ArrayList<int[]> eggLocations) {
 		this.K = K;
@@ -93,9 +99,9 @@ public class EggCarton extends SimAlState {
 		}
 		
 		//do the vertical loop!
-		for (int i = 0; i < this.grid[0].length; i++) {
+		for (int i = 0; i < this.N; i++) {
 			counter = 0;
-			for (int j = 0; j < this.grid.length; j++)
+			for (int j = 0; j < this.M; j++)
 				if (this.grid[j][i] == EGG)
 					counter++;
 			if (counter >= this.K) {
@@ -107,19 +113,68 @@ public class EggCarton extends SimAlState {
 		}
 		
 		//do the diagonal loops!
-		boolean wat = (this.M >= this.N ? true : false);
 		//wat is true if M >= N or false if M > N
 		//that is to say:
 		//	M >= N --> M==N or the grid is taller than it is wide
 		//	M < N --> the grid is wider than it is taller
-		int I = Math.max(this.M, this.N);
-		int J = Math.min(this.M, this.N);
 		//need to traverse the longest side here
-		for (int i = 0; i < I; i++) {
+		for (int i = 0; i < this.M; i++) {
 			//alright so if wat then I is M
 			//if not wat then I is N 
 			counter = 0;
-			for (int j = 0; j < J; j++) {
+			int a = i;
+			//iterate down-to-right
+			for (int j = 0; j < this.N; j++) {
+				try {
+					if (this.grid[a][j] == EGG)
+						counter++;
+				} catch (IndexOutOfBoundsException e) {
+					break;
+				}
+				a++;
+			}
+			//blocking
+			if (counter >= this.K) {
+				a = i;
+				for (int j = 0; j < this.N; j++) {
+					if (this.grid[a][j] == EMPTY)
+						this.grid[a][j] = BLOCKED;
+					a++;
+				}
+			}
+			//iterate down-to-left
+			counter = 0;
+			a = i;
+			for (int j = this.N-1; j > -1; j--) {
+				try {
+					if (this.grid[a][j] == EMPTY)
+						counter++;
+				} catch (IndexOutOfBoundsException e) {
+					break;
+				}
+				a++;
+			}
+			//blocking
+			if (counter >= this.K) {
+				a = i;
+				for (int j = this.N-1; j > -1; j--) {
+					if (this.grid[a][j] == EMPTY)
+						this.grid[a][j] = BLOCKED;
+					a++;
+				}
+			}
+			
+			//iterate up-to-right
+			counter = 0;
+			a = i;
+			for (int j = 0; j < this.N; j++) {
+				try {
+					if (this.grid[a][j] == EMPTY)
+						counter++;
+				} catch (IndexOutOfBoundsException e) {
+					break;
+				}
+				a--;
 			}
 			
 		}	
@@ -156,6 +211,8 @@ public class EggCarton extends SimAlState {
 		//now we need to create n new solutions from the reduced version of this
 		for (int i = 0; i < n; i++)
 			res.add(new EggCarton(this.grid, this.K, temp));
+		//this constructor takes care of filling the new states.
+		
 		return res;
 	}
 }
