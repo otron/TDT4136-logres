@@ -78,9 +78,13 @@ public class EggCarton extends SimAlState {
 		//should update the state's variables to make sure of things.
 		//because of reasons.
 		this.grid = new int[M][N]; //wipe that state clean. Because that's the easiest way to do this.
-		for (int[] i : this.eggLocs) {
+			//uninitialized integers are set to 0
+		
+		//place all those delicious eggs.
+		for (int[] i : this.eggLocs)
 			this.grid[i[0]][i[1]] = EGG;
-		}
+
+		//check if any blocking is necessary.
 		
 		//do the horizontal loop!
 		int counter = 0;
@@ -99,85 +103,86 @@ public class EggCarton extends SimAlState {
 		}
 		
 		//do the vertical loop!
-		for (int i = 0; i < this.N; i++) {
+		for (int j = 0; j < this.N; j++) {
 			counter = 0;
-			for (int j = 0; j < this.M; j++)
-				if (this.grid[j][i] == EGG)
+			for (int i = 0; i < this.M; i++)
+				if (this.grid[i][j] == EGG)
 					counter++;
-			if (counter >= this.K) {
-				//we need to block all empty spaces on this vertical line.
-				for (int j = 0; j < this.grid.length; j++)
-					if (this.grid[j][i] == EMPTY)
-						this.grid[j][i] = BLOCKED;
-			}
+			//blocking
+			if (counter >= this.K)
+				for (int i = 0; i < this.M; i++)
+					if (this.grid[i][j] == EMPTY)
+						this.grid[i][j] = BLOCKED;
 		}
+			
+			
+//		for (int i = 0; i < this.N; i++) {
+//			counter = 0;
+//			for (int j = 0; j < this.M; j++)
+//				if (this.grid[j][i] == EGG)
+//					counter++;
+//			if (counter >= this.K) {
+//				//we need to block all empty spaces on this vertical line.
+//				for (int j = 0; j < this.grid.length; j++)
+//					if (this.grid[j][i] == EMPTY)
+//						this.grid[j][i] = BLOCKED;
+//			}
+//		}
 		
 		//do the diagonal loops!
-		//wat is true if M >= N or false if M > N
-		//that is to say:
-		//	M >= N --> M==N or the grid is taller than it is wide
-		//	M < N --> the grid is wider than it is taller
 		//need to traverse the longest side here
-		for (int i = 0; i < this.M; i++) {
-			//alright so if wat then I is M
-			//if not wat then I is N 
+		//which is always M because fuck you!
+		for (int i = 0; i < this.M; i++) { 
 			counter = 0;
-			int a = i;
-			//iterate down-to-right
-			for (int j = 0; j < this.N; j++) {
+			//down-right
+			for (int j = 0; j < this.N && i+j < this.M; j++)
+				//down-right is [i+j,j] as j++
 				try {
-					if (this.grid[a][j] == EGG)
+					if (this.grid[i+j][j] == EGG)
 						counter++;
 				} catch (IndexOutOfBoundsException e) {
 					break;
 				}
-				a++;
-			}
-			//blocking
-			if (counter >= this.K) {
-				a = i;
-				for (int j = 0; j < this.N; j++) {
-					if (this.grid[a][j] == EMPTY)
-						this.grid[a][j] = BLOCKED;
-					a++;
-				}
-			}
-			//iterate down-to-left
-			counter = 0;
-			a = i;
-			for (int j = this.N-1; j > -1; j--) {
-				try {
-					if (this.grid[a][j] == EMPTY)
-						counter++;
-				} catch (IndexOutOfBoundsException e) {
-					break;
-				}
-				a++;
-			}
-			//blocking
-			if (counter >= this.K) {
-				a = i;
-				for (int j = this.N-1; j > -1; j--) {
-					if (this.grid[a][j] == EMPTY)
-						this.grid[a][j] = BLOCKED;
-					a++;
-				}
-			}
+				//blocking
+			if (counter >= this.K)
+				for (int j = 0; j < this.N && i+j < this.M; j++)
+					if (this.grid[i+j][j] == EMPTY)
+						this.grid[i+j][j] = BLOCKED;
+			//alternatively a = (a==EMPTY ? BLOCKED : a) but a is so long it'll look worse.
 			
-			//iterate up-to-right
+			//up-right
 			counter = 0;
-			a = i;
-			for (int j = 0; j < this.N; j++) {
-				try {
-					if (this.grid[a][j] == EMPTY)
-						counter++;
-				} catch (IndexOutOfBoundsException e) {
-					break;
-				}
-				a--;
-			}
+			for (int j = 0; j < this.N && i-j > -1; j++)
+				if (this.grid[i-j][j] == EGG)
+					counter++;
+				//blocking
+			if (counter >= this.K)
+				for (int j = 0; j < this.N && i-j < -1; j++)
+					if (this.grid[i-j][j] == EMPTY)
+						this.grid[i-j][j] = BLOCKED;
 			
-		}	
+			//down-left
+			counter = 0;
+			for (int j = (this.N - 1), a = i; j < -1 && i+a < this.M; j--, a++)
+				if (this.grid[i+a][j] == EGG)
+					counter++;
+				//blocking
+			
+			if (counter >= this.K)
+				for (int j = this.N - 1, a = i; j < -1 && i+a < this.M; j--, a++)
+					if (this.grid[i+a][j] == EMPTY)
+						this.grid[i+a][j] = BLOCKED;
+			
+			//up-left
+			counter = 0;
+			for (int j = (this.N - 1), a = 0; j < -1 && i-a < -1; j--, a--)
+				if (this.grid[i-a][j] == EGG)
+					counter++;
+				//blocking
+			for (int j = (this.N - 1), a = 0; j < -1 && i-a < -1; j--, a--)
+				if (this.grid[i-a][j] == EMPTY)
+					this.grid[i-a][j] = BLOCKED;
+		}
 	}
 	private int[] generateRandomCoords() {
 		Random rng = new Random();
@@ -195,6 +200,7 @@ public class EggCarton extends SimAlState {
 	public PriorityQueue<SimAlState> generateNeighbours(int n) {
 		//n is the number of neighbours to generate
 		double perc = 1.0/3.0; //percentage of placed eggs to remove
+		
 		int eggsToRemove = (int) (this.eggLocs.size() * (perc));
 		if (eggsToRemove < 1)
 			eggsToRemove = 1;
@@ -204,6 +210,7 @@ public class EggCarton extends SimAlState {
 		ArrayList<int[]> temp = new ArrayList<int[]>();
 		for (int[] i : this.eggLocs)
 			temp.add(i);
+		
 		//now we remove at least eggsToRemove eggs
 		for (int i = 0; i < eggsToRemove; i++)
 			temp.remove(rng.nextInt(temp.size()));
