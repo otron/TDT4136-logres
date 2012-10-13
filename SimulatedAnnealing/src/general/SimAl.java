@@ -10,9 +10,11 @@ public class SimAl {
 	int Ft; //target
 	double dT; //change in temperature.
 	SimAlState bestState; //I couldn't think of a reason for not doing this.
+	SimAlState initialState;
 	boolean verbose; //you know what this is.
 	int ntg; //Neighbours to generate. Go team acronyms!
 	Random rng; //rng rngggg
+	int[] initialStateStats;
 	
 	//also there needs to be some data structure that represents the states.
 	//no we're doing that on the actual states!
@@ -24,16 +26,27 @@ public class SimAl {
 		this.T = initTemp;
 		this.Ft = goal;
 		this.dT = dT;
-		this.bestState = initialState;
+		this.bestState = initialState.clone();
+		this.initialState = bestState;
 		this.ntg = n;
 		this.rng = new Random();
 	}
 	
 	public static void main(String args[]) {
 		EggCarton derp = new EggCarton(5, 5, 2);
-		SimAl herp = new SimAl(1.0, 10, 0.00001, derp, 4);
+		SimAl herp = new SimAl(1.0, 10, 0.01, derp, 8);
 		herp.setVerbosity(false);
-		herp.dueProcess();
+		int[] stats = new int[100];
+		int[] yesmygod = new int[33];
+		for (int i = 0; i < stats.length; i++) {
+			int d = herp.dueProcess();
+			stats[i] = d;
+			yesmygod[d]++; 
+		}
+		
+		for (int i : yesmygod)
+			System.out.print(i+" ");
+		
 		int M = 9, N = 5;
 		int[][] kk = new int[M][N];
 		boolean doR, upR, doL, upL, V, H;
@@ -112,7 +125,7 @@ public class SimAl {
 	}
 	
 	
-	public void dueProcess() {
+	public int dueProcess() {
 		//haha am I the wittiest fellow ever or what?
 		reset();
 		double bestObjVal = bestState.evaluateObjectively();
@@ -133,12 +146,13 @@ public class SimAl {
 				bestState = pickRandomFromNeighbours(neighbours); //Exploring
 			
 			T = T-dT;
-		}//Beyond the realm of magic.		
-		bestState.print();
+		}//Beyond the realm of magic.
+		return bestState.getNumberOfThings();
 		
 	}
 	public void reset() {
-		this.T = this.initT;
+		this.T = this.initT;  
+		this.bestState = this.initialState.clone();
 		//well that was easy.
 	}
 

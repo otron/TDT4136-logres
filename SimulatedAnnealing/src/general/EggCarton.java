@@ -31,13 +31,14 @@ public class EggCarton extends SimAlState {
 		this.N = grid[0].length;
 		this.grid = new int[this.M][this.N];
 		this.eggLocs = eggLocations;
+		this.randomize();
 		this.update();
 		this.fill();
 	}
 	@Override
 	public double evaluateObjectively() {
 		int i = this.getNumberOfEggs();
-		return (i == 0 ? 0 : (1.0 - 1.0/i));
+		return (i == 0 ? 0 : (1.0 - 1.0/(2.0*(double)i)));
 		//returns 0 if there are 0 eggs in place
 		//otherwise returns 1/number of eggs
 	}
@@ -68,13 +69,7 @@ public class EggCarton extends SimAlState {
 			}
 		}
 	}
-	private void updateForEggAt(int[] coords) {
-		//need to traverse the grid from the egg and check for other eggs in each line
-		int cM = coords[0];
-		int cN = coords[1];
-		
-		//horizontally
-	}
+
 	private void update() {
 		//should update the state's variables to make sure of things.
 		//because of reasons.
@@ -181,31 +176,54 @@ public class EggCarton extends SimAlState {
 					res++;
 		return res;
 	}
+	
+	@Override
+	public int getNumberOfThings() {
+		return this.getNumberOfEggs();
+	}
+	@Override
+	public EggCarton clone() {
+		return new EggCarton(this.M, this.N, this.K);
+	}
 	@Override
 	public PriorityQueue<SimAlState> generateNeighbours(int n) {
 		//n is the number of neighbours to generate
-		double perc = 1.0/4.0; //percentage of placed eggs to remove
-		
+		PriorityQueue<SimAlState> res = new PriorityQueue<SimAlState>();
+		for (int i = 0; i < n; i++)
+			res.add(new EggCarton(this.grid, this.K, this.eggLocs));
+		//the constructor takes care of the rest.
+//		
+//		int eggsToRemove = (int) (this.eggLocs.size() * (perc));
+//		if (eggsToRemove < 1)
+//			eggsToRemove = 1;
+//		Random rng = new Random();
+//		//need to create a copy of this' egg locations
+//		ArrayList<int[]> temp = new ArrayList<int[]>();
+//		for (int[] i : this.eggLocs)
+//			temp.add(i);
+//		
+//		//now we remove at least eggsToRemove eggs
+//		for (int i = 0; i < eggsToRemove; i++)
+//			temp.remove(rng.nextInt(temp.size()));
+//		
+//		//now we need to create n new solutions from the reduced version of this
+//		for (int i = 0; i < n; i++)
+//			res.add(new EggCarton(this.grid, this.K, temp));
+//		//this constructor takes care of filling the new states.
+//		
+		return res;
+	}
+	private void randomize() {
+		double perc = 0.01; //percentage of placed eggs to remove
 		int eggsToRemove = (int) (this.eggLocs.size() * (perc));
 		if (eggsToRemove < 1)
 			eggsToRemove = 1;
 		Random rng = new Random();
-		PriorityQueue<SimAlState> res = new PriorityQueue<SimAlState>();
-		//need to create a copy of this' egg locations
-		ArrayList<int[]> temp = new ArrayList<int[]>();
-		for (int[] i : this.eggLocs)
-			temp.add(i);
 		
-		//now we remove at least eggsToRemove eggs
-		for (int i = 0; i < eggsToRemove; i++)
-			temp.remove(rng.nextInt(temp.size()));
-		
-		//now we need to create n new solutions from the reduced version of this
-		for (int i = 0; i < n; i++)
-			res.add(new EggCarton(this.grid, this.K, temp));
-		//this constructor takes care of filling the new states.
-		
-		return res;
+		for (int i = 0; i < eggsToRemove; i++) {
+			//removes a randomly selected egg.
+			this.eggLocs.remove(rng.nextInt(this.eggLocs.size()));
+		}
 	}
 	@Override
 	public void print() {

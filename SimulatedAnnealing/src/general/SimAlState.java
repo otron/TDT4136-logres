@@ -2,7 +2,7 @@ package general;
 
 import java.util.PriorityQueue;
 
-public class SimAlState implements Comparable<SimAlState> {
+public class SimAlState implements Comparable<SimAlState>, Cloneable {
 	//this is the outline of a type of a solution state used in the algorithm.
 	
 	int F; // target value? Best value?
@@ -37,5 +37,12 @@ public class SimAlState implements Comparable<SimAlState> {
 	
 	public void debugPrint() {
 		
+	}
+	public SimAlState clone() {
+		return null;
+		
+	}
+	public int getNumberOfThings() {
+		return 0;
 	}
 }
