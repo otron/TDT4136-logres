@@ -134,7 +134,7 @@ public class SimAl {
 			
 			T = T-dT;
 		}//Beyond the realm of magic.		
-		bestState.debugPrint();
+		bestState.print();
 		
 	}
 	public void reset() {

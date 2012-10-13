@@ -141,7 +141,7 @@ public class EggCarton extends SimAlState {
 					counter++;
 				//blocking
 			if (counter >= this.K)
-				for (int j = 0; j < this.N && i-j < -1; j++)
+				for (int j = 0; j < this.N && i-j > -1; j++)
 					if (this.grid[i-j][j] == EMPTY)
 						this.grid[i-j][j] = BLOCKED;
 			
@@ -163,9 +163,10 @@ public class EggCarton extends SimAlState {
 				if (this.grid[i-a][j] == EGG)
 					counter++;
 				//blocking
-			for (int j = (this.N - 1), a = 0; j > -1 && i-a > -1; j--, a++)
-				if (this.grid[i-a][j] == EMPTY)
-					this.grid[i-a][j] = BLOCKED;
+			if (counter >= this.K)
+				for (int j = (this.N - 1), a = 0; j > -1 && i-a > -1; j--, a++)
+					if (this.grid[i-a][j] == EMPTY)
+						this.grid[i-a][j] = BLOCKED;
 		}
 	}
 	private int[] generateRandomCoords() {
@@ -285,26 +286,18 @@ public class EggCarton extends SimAlState {
 					//alternatively a = (a==EMPTY ? BLOCKED : a) but a is so long it'll look worse.
 					
 					//up-right
-					counter = 0;
-					for (int j = 0; j < this.N && i-j > -1; j++)
-						if (this.grid[i-j][j] == EGG)
-							counter++;
-						//blocking
-					System.out.println(counter);
-					if (counter >= this.K)
-						for (int j = 0; j < this.N && i-j > -1; j++)
-							if (this.grid[i-j][j] == EMPTY)
-								this.grid[i-j][j] = BLOCKED;
-					
-					for (int[] fuck : this.grid) {
-						for (int shit : fuck)
-							System.out.print(shit+" ");
-						System.out.println();
-					}
-					System.out.println();
-//					
-//					//down-left
 //					counter = 0;
+//					for (int j = 0; j < this.N && i-j > -1; j++)
+//						if (this.grid[i-j][j] == EGG)
+//							counter++;
+//						//blocking
+//					if (counter >= this.K)
+//						for (int j = 0; j < this.N && i-j > -1; j++)
+//							if (this.grid[i-j][j] == EMPTY)
+//								this.grid[i-j][j] = BLOCKED;
+
+					//down-left
+					counter = 0;
 //					for (int j = (this.N - 1), a = 0; j > -1 && i+a < this.M; j--, a++)
 //						if (this.grid[i+a][j] == EGG)
 //							counter++;
@@ -314,16 +307,24 @@ public class EggCarton extends SimAlState {
 //						for (int j = (this.N - 1), a = 0; j > -1 && i+a < this.M; j--, a++)
 //							if (this.grid[i+a][j] == EMPTY)
 //								this.grid[i+a][j] = BLOCKED;
-//					
-//					//up-left
-//					counter = 0;
-//					for (int j = (this.N - 1), a = 0; j > -1 && i-a > -1; j--, a++)
-//						if (this.grid[i-a][j] == EGG)
-//							counter++;
-//						//blocking
-//					for (int j = (this.N - 1), a = 0; j > -1 && i-a > -1; j--, a++)
-//						if (this.grid[i-a][j] == EMPTY)
-//							this.grid[i-a][j] = BLOCKED;
+					
+					//up-left
+					counter = 0;
+					for (int j = (this.N - 1), a = 0; j > -1 && i-a > -1; j--, a++)
+						if (this.grid[i-a][j] == EGG)
+							counter++;
+						//blocking
+					if (counter >= this.K)
+						for (int j = (this.N - 1), a = 0; j > -1 && i-a > -1; j--, a++)
+							if (this.grid[i-a][j] == EMPTY)
+								this.grid[i-a][j] = BLOCKED;
+					
+					for (int[] fuck : this.grid) {
+						for (int shit : fuck)
+							System.out.print(shit+" ");
+						System.out.println();
+					}
+					System.out.println();
 										
 				}				
 	}
