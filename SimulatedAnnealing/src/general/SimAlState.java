@@ -26,4 +26,16 @@ public class SimAlState implements Comparable<SimAlState> {
 			// 1 if this is worse
 		//I don't know if it should be reversed yet.
 	}
+	@Override
+	public String toString() {
+		return "You forgot to override this method!";
+	}
+	
+	public void print() {
+		
+	}
+	
+	public void debugPrint() {
+		
+	}
 }
