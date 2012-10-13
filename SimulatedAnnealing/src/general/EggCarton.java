@@ -292,7 +292,7 @@ public class EggCarton extends SimAlState {
 						//blocking
 					System.out.println(counter);
 					if (counter >= this.K)
-						for (int j = 0; j < this.N && i-j < -1; j++)
+						for (int j = 0; j < this.N && i-j > -1; j++)
 							if (this.grid[i-j][j] == EMPTY)
 								this.grid[i-j][j] = BLOCKED;
 					
