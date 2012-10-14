@@ -1,3 +1,11 @@
+An objective function is a function that takes a complete solution and evaluates how "good" it is, while a heuristic function takes a partial solution and makes a guess as to how close it is to an optimal solution. 
+
+Both functions involve calculating a value of the current state. The important difference is that the objective function has a complete solution to work with, while a heuristic has only a partial solution. This means that the objective function can "test" the solution directly and get a correct "value" of the state, while a heuristic has to use some clever guesswork based on knowledge of the properties of the current state and some assumption about the solution.
+
+
+IS THIS OK, ODD?!
+
+
 An objective function should look at the quality of the solution compared to what it is believed an optimal solution looks like.
 
 It doesn't feel quite right to call it an objective function unless the shape of an actual optimal solution is known, at which point it feels weird using local search to find it because hey you already know what the solution looks like and Local Search doesn't help you get there.
