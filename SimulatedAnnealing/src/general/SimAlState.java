@@ -24,7 +24,8 @@ public class SimAlState implements Comparable<SimAlState>, Cloneable {
 			//-1 if this is better
 			// 0 if they are equal
 			// 1 if this is worse
-		//I don't know if it should be reversed yet.
+		//It's reversed because we're using a PriorityQueue to automatically sort them but java's PQ sorts ascendingly
+		//and we don't want that
 	}
 	@Override
 	public String toString() {

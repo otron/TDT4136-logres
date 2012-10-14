@@ -38,7 +38,7 @@ public class SimAl {
 	}
 	public static void doPuzzles() {
 		double initTemp = 1.0;
-		double dT = 0.01;
+		double dT = 0.01; //initTemp/dT = number of iterations
 		int goal = 1; //well this is pretty useless because the objectivefunction will never return a 1.0
 		int ntg = 8; //neighbours to generate
 		ArrayList<SimAlState> initStates = new ArrayList<SimAlState>();
