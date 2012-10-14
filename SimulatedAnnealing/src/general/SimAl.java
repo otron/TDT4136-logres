@@ -33,11 +33,11 @@ public class SimAl {
 	}
 	
 	public static void main(String args[]) {
-		EggCarton derp = new EggCarton(20, 20, 3);
+		EggCarton derp = new EggCarton(10, 10, 3);
 		SimAl herp = new SimAl(1.0, 10, 0.1, derp, 8);
 		herp.setVerbosity(false);
 		int[] stats = new int[100];
-		int[] yesmygod = new int[80];
+		int[] yesmygod = new int[33];
 		for (int i = 0; i < stats.length; i++) {
 			int d = herp.dueProcess();
 			stats[i] = d;
@@ -100,7 +100,7 @@ public class SimAl {
 		int a = rng.nextInt(list.size());
 		//a is now a random integer in the range [0, ntg)
 		//so now we just have to get the element with index = a in the list. 
-		for (int i = 0; i < a; i++) //will perform a-1 iterations.
+		for (int i = 1; i < a; i++) //will perform a-1 iterations.
 			list.iterator().next(); 
 		return list.iterator().next();
 	}
