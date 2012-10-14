@@ -1,0 +1,44 @@
+1.
+	The initial state of the puzzle was chosen to be 1234/56789.
+2.
+	A goal state is one in which the fraction/node appropriately evaluates to the goal.
+3.
+	The arc cost is assessed between two nodes. It is an integer representing the number of differences between the two nodes. I don't know why I thought this would be a good idea, as it only takes half as many swaps as differences to transform one node to another. But it seems to be more efficient than other methods (such as half this value and a constant value between 0.1 and 5.0).
+	Example: the arc cost between 1234/56798 and 3215/46789 is evaluated to be 6.
+	Note: I've found that a constant arc cost of 5.0 decreases the length/depth of the solutions (ie the solutions become more optimal), but also decreases efficiency.
+4.
+	The heuristic function is pretty simple.
+	node.h = 350 * (Math.abs(goal - node.evaluate()));
+	What it does is calculate the difference between the node's state and the goal state. And then it multiplies that by 350. I don't know why this works, but I experimented with it a bit and found out that 350 seems to be a good magic number. Similar to how the A*-paper we were given states that a constant arc cost between 0.05 and 0.2 seems to work best, I guess.
+
+5.
+	I used the "swap" operator (as described in the exercise) to generate successor states. That is to say one can create a new legal state by swapping any two of the integers in a state. This means that each state has 44 possible children, all of which are possible parents of the node.
+
+6.
+	Note: Not all of these solutions are optimal. But that's okay.
+	Also 1/6 takes a really long time to evaluate. What gives?
+
+
+10 deep solution found: 7923/15846 for goal = 0.5, after 931 expansions in 578ms
+1234/56789 => 5234/16789 => 8234/16759 => 8234/16579 => 8734/16529 => 7834/16529 => 7834/15629 => 7934/15628 => 7934/15826 => 7924/15836
+
+6 deep solution found: 5823/17469 for goal = 0.3333333333333333, after 123 expansions in 44ms
+1234/56789 => 5234/16789 => 5834/16729 => 5834/17629 => 5836/17429 => 5832/17469
+
+8 deep solution found: 4392/17568 for goal = 0.25, after 204 expansions in 41ms
+1234/56789 => 5234/16789 => 4235/16789 => 4325/16789 => 4325/17689 => 4395/17682 => 4396/17582 => 4392/17586
+
+4 deep solution found: 9237/46185 for goal = 0.2, after 13 expansions in 2ms
+1234/56789 => 9234/56781 => 9235/46781 => 9235/46187
+
+11 deep solution found: 5697/34182 for goal = 0.16666666666666666, after 19131 expansions in 259611ms
+1234/56789 => 8234/56719 => 8235/46719 => 8235/49716 => 7235/49816 => 7245/39816 => 6245/39817 => 6295/34817 => 5296/34817 => 5692/34817 => 5692/34187
+
+7 deep solution found: 7614/53298 for goal = 0.14285714285714285, after 2740 expansions in 6720ms
+1234/56789 => 8234/56719 => 8264/53719 => 7264/53819 => 7624/53819 => 7624/53189 => 7614/53289
+
+5 deep solution found: 6839/54712 for goal = 0.125, after 428 expansions in 103ms
+1234/56789 => 6234/51789 => 6834/51729 => 6834/52719 => 6832/54719
+
+5 deep solution found: 6381/57429 for goal = 0.1111111111111111, after 160 expansions in 27ms
+1234/56789 => 6234/51789 => 6234/57189 => 6324/57189 => 6384/57129

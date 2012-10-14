@@ -191,29 +191,10 @@ public class EggCarton extends SimAlState {
 		PriorityQueue<SimAlState> res = new PriorityQueue<SimAlState>();
 		for (int i = 0; i < n; i++)
 			res.add(new EggCarton(this.grid, this.K, this.eggLocs));
-		//the constructor takes care of the rest.
-//		
-//		int eggsToRemove = (int) (this.eggLocs.size() * (perc));
-//		if (eggsToRemove < 1)
-//			eggsToRemove = 1;
-//		Random rng = new Random();
-//		//need to create a copy of this' egg locations
-//		ArrayList<int[]> temp = new ArrayList<int[]>();
-//		for (int[] i : this.eggLocs)
-//			temp.add(i);
-//		
-//		//now we remove at least eggsToRemove eggs
-//		for (int i = 0; i < eggsToRemove; i++)
-//			temp.remove(rng.nextInt(temp.size()));
-//		
-//		//now we need to create n new solutions from the reduced version of this
-//		for (int i = 0; i < n; i++)
-//			res.add(new EggCarton(this.grid, this.K, temp));
-//		//this constructor takes care of filling the new states.
-//		
 		return res;
 	}
 	private void randomize() {
+		//removes some amount of eggs 
 		double perc = 0.01; //percentage of placed eggs to remove
 		int eggsToRemove = (int) (this.eggLocs.size() * (perc));
 		if (eggsToRemove < 1)
