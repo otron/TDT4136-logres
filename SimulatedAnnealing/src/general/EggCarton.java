@@ -195,10 +195,9 @@ public class EggCarton extends SimAlState {
 	}
 	private void randomize() {
 		//removes some amount of eggs 
-		double perc = 0.01; //percentage of placed eggs to remove
-		int eggsToRemove = (int) (this.eggLocs.size() * (perc));
-		if (eggsToRemove < 1)
-			eggsToRemove = 1;
+		int eggsToRemove = 1; //trial and error has led me to believe this is a really good idea.
+		//see because if you only remove 1 egg, then you'll always be able to re-place at least one egg.
+		//so you'll be able to escape local maxima, but not a global maximum.
 		Random rng = new Random();
 		
 		for (int i = 0; i < eggsToRemove; i++) {
