@@ -1,0 +1,3 @@
+An objective function should look at the quality of the solution compared to what it is believed an optimal solution looks like.
+
+It doesn't feel quite right to call it an objective function unless the shape of an actual optimal solution is known, at which point it feels weird using local search to find it because hey you already know what the solution looks like and Local Search doesn't help you get there.
