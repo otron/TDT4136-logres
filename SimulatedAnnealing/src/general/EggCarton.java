@@ -9,7 +9,7 @@ public class EggCarton extends SimAlState {
 	int[][] grid;
 	int K, M, N;
 	ArrayList<int[]> eggLocs; //contains coords for eggs currently placed on grid.
-	private int EGG = 1, EMPTY = 0, BLOCKED = 2; //enums are for wusses.
+	private final int EGG = 1, EMPTY = 0, BLOCKED = 2; //enums are for wusses.
 	
 	
 	public EggCarton(int M, int N, int K) {
@@ -210,7 +210,7 @@ public class EggCarton extends SimAlState {
 		this.update();
 		for (int[] i : this.grid) {
 			for (int j : i)
-				System.out.print(j+" ");
+				System.out.print((j==BLOCKED)?EMPTY+" ":j+" ");
 			System.out.println();
 		}
 		System.out.println("Score: " + this.evaluateObjectively() + ". Eggs placed: " + this.getNumberOfEggs());

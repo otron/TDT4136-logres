@@ -1,5 +1,6 @@
 package general;
 
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -33,28 +34,45 @@ public class SimAl {
 	}
 	
 	public static void main(String args[]) {
-		EggCarton derp = new EggCarton(10, 10, 3);
-		SimAl herp = new SimAl(1.0, 10, 0.1, derp, 8);
-		herp.setVerbosity(false);
-		int[] stats = new int[100];
-		int[] yesmygod = new int[33];
-		for (int i = 0; i < stats.length; i++) {
-			int d = herp.dueProcess();
-			stats[i] = d;
-			yesmygod[d]++; 
-		}
-		
-		for (int i : yesmygod)
-			System.out.print(i+" ");
-		
+		doPuzzles();
 	}
 	public static void doPuzzles() {
+		double initTemp = 1.0;
+		double dT = 0.01;
+		int goal = 1; //well this is pretty useless because the objectivefunction will never return a 1.0
+		int ntg = 8; //neighbours to generate
+		ArrayList<SimAlState> initStates = new ArrayList<SimAlState>();
+			initStates.add(new EggCarton(5, 5, 2));
+			initStates.add(new EggCarton(6, 6, 2));
+			initStates.add(new EggCarton(8, 8, 1)); //yes this looks like the 8 queen puzzle http://en.wikipedia.org/wiki/Eight_queens_puzzle
+			initStates.add(new EggCarton(10, 10, 3));
 		
+		for (SimAlState SAS : initStates) {
+			SimAl yoProbs = new SimAl(initTemp, goal, dT, SAS, ntg);
+			yoProbs.dueProcess().print();
+		}
+		
+		int reps = 100;
+		int counter = 0;
+		for (SimAlState SAS : initStates) {
+			SimAl yoProbs = new SimAl(initTemp, goal, dT, SAS, ntg);
+			int[] res = new int[512];
+			for (int i = 0; i < reps; i++) {
+				int k = yoProbs.dueProcess().getNumberOfThings();
+				res[k]++;
+			}
+			String sb = "Solutions for puzzle #" + ++counter +": ";
+			for (int i = 0; i < res.length; i++)
+				if (res[i] != 0)
+					sb += i +": " + res[i] + ", ";
+			System.out.println(sb);
+				
+		}
 	}
 	
 	
 	
-	public int dueProcess() {
+	public SimAlState dueProcess() {
 		//haha am I the wittiest fellow ever or what?
 		reset();
 		double bestObjVal = bestState.evaluateObjectively();
@@ -82,13 +100,9 @@ public class SimAl {
 				om[1]++;
 				b = false;
 			}
-//			System.out.println("Iteration " + Math.round((1-T)*10) +": " +bestState.getNumberOfThings() + ", " + (b?"Exploited":"Explored"));
-		
 			T = T-dT;
 		}//Beyond the realm of magic.
-			//System.out.println(om[0] + ", " + om[1]);
-		return bestState.getNumberOfThings();
-		
+		return bestState;
 	}
 	public void reset() {
 		this.T = this.initT;  
