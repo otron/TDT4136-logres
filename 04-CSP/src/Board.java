@@ -1,3 +1,4 @@
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,10 +30,32 @@ public class Board {
 		Random rng = new Random();
 		while (counter < this.maxSteps && !this.isOptimal()) {
 			//First we select a random queen.
-//			int q = rng.nextInt(this.K);
+			int q = rng.nextInt(this.K); //(a)
 			
-			//now we need to generate the number of conflicts for each cell in q's row.
+			//Find conflicts for each cell in row q.
+			int[] rows = this.findConflictsForRow(q);
 			
+			//find the lowest conflict count
+			int min = Integer.MAX_VALUE;
+			for (int i : rows)
+				min = (i < min ? i : min);
+			
+			//find which cells has this conflict count
+			ArrayList<Integer> ls = new ArrayList<Integer>();
+			for (int i = 0; i < this.K; i++) {
+				if (rows[i] == min)
+					ls.add(i);
+			}
+			
+			//is there only one cell with the minimum conflict count and does this happen to be the one the queen is already in?
+			if (min > rows[q] && ls.size() == 1) {
+				//remain as you were, gentlequeens.
+			} else { //oh okay.
+				//pick a random one to put the queen in
+				int a = rng.nextInt(ls.size());
+				this.Q[q] = ls.get(a);
+			}
+			//yeah I'm sure there's nothing that could go wrong here.
 			counter++;
 		}
 	}
@@ -101,10 +124,7 @@ public class Board {
 	 * @return returns the number of queens currently in place on the board.
 	 */
 	public int countQueens() {
-		int res = 0;
-		for (int i : this.Q)
-			if (i != -1)
-				res++;
-		return res;
+		return this.K;
+		//due to the initialization step there will always be K queens in place on the board.
 	}
 }
