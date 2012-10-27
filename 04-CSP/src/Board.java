@@ -10,9 +10,9 @@ public class Board {
 	
 	int[] Q; //used to store the positions of placed queens. 
 		//Q[i] = k --> i is the row#, k is the column#
-	int K; //the size of the board, coincidentally also the number of queens in an optimal solution.
+	final int K; //the size of the board, coincidentally also the number of queens in an optimal solution.
 	StringBuilder debugInfo; //I have no idea if this will work.
-	int maxSteps; //part of the MIN-CONFLICTS algorithm
+	final int maxSteps; //part of the MIN-CONFLICTS algorithm
 	
 	
 	public Board(int K, int maxSteps) {
@@ -29,7 +29,7 @@ public class Board {
 		Random rng = new Random();
 		while (counter < this.maxSteps && !this.isOptimal()) {
 			//First we select a random queen.
-			int q = rng.nextInt(this.K);
+//			int q = rng.nextInt(this.K);
 			
 			//now we need to generate the number of conflicts for each cell in q's row.
 			
@@ -45,7 +45,7 @@ public class Board {
 	private int[] findConflictsForRow(int n) {
 		int[] res = new int[this.K];
 		for (int i = 0; i < this.K; i++) {
-			if (i != n) {
+			if (i != n) { //we are not doing this for the queen on the row we are finding collisions for
 				/** Math that junk up.
 				 * 
 				 * All right. Listen up:
@@ -66,12 +66,9 @@ public class Board {
 				if (c+d < this.K)
 					res[c+d]++;	// [n][c+d]
 				//that was a lot easier than I expected
-			} else {
-				//do nothing
 			}
 		}
-		
-		return null;
+		return res;
 	}
 	/**
 	 * Generates the initial board-state per the assignment's specifications
@@ -84,11 +81,19 @@ public class Board {
 	}
 	
 	/**
-	 * TODO: fix because this won't work
-	 * @return returns true if the board has a Queen in every column, false if it does not.
+	 * 
+	 * @return returns true if there are no conflicting queens on the board.
 	 */
 	public boolean isOptimal() {
-		return (this.countQueens() == this.K ? true : false);
+		for (int i = 0; i < this.K; i++) {
+			int[] derp = this.findConflictsForRow(i);
+			if (derp[this.Q[i]] > 0) { //Are there any other queens that conflict with this one?
+				return false;
+			}
+		}
+		return true;
+		// This could be done on a queen-by-queen basis. I think that would be more elegant or whatevs.
+		// Whatevs.
 	}
 	
 	/**
