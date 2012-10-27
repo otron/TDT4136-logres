@@ -11,7 +11,8 @@ import java.util.Random;
 public class Board {
 	
 	public static void main(String args[]) {
-		Tests.timeTrial();
+		//Tests.timeTrial();
+		Tests.correctnessTest(1000, 1000, 10000);
 	}
 	
 	int[] Q; //used to store the positions of placed queens. 
@@ -19,14 +20,14 @@ public class Board {
 	final int K; //the size of the board, coincidentally also the number of queens in an optimal solution.
 	StringBuilder debugInfo; //I have no idea if this will work.
 	final int maxSteps; //part of the MIN-CONFLICTS algorithm
-	int stepsDone;
+	int stepsTaken;
 	long timeTaken;
 	
 	
 	public Board(int K, int maxSteps) {
 		this.K = K;
 		this.Q = new int[this.K];
-		this.maxSteps = maxSteps;
+		this.maxSteps = (maxSteps < 0 ? Integer.MAX_VALUE : maxSteps);
 		this.debugInfo = new StringBuilder();
 		
 		this.initialize();
@@ -66,7 +67,7 @@ public class Board {
 			//yeah I'm sure there's nothing that could go wrong here.
 			counter++;
 		}
-		this.stepsDone = counter;
+		this.stepsTaken = counter;
 		this.timeTaken = (new Date().getTime()) - startTime;
 	}
 	
@@ -137,7 +138,7 @@ public class Board {
 		
 		sb.append("\n");
 		sb.append("Solution found in ");
-		sb.append(this.stepsDone + "/" + this.maxSteps);
+		sb.append(this.stepsTaken + "/" + this.maxSteps);
 		
 		return sb.toString();
 	}
@@ -163,6 +164,9 @@ public class Board {
 	
 	public long getTimeTaken() {
 		return this.timeTaken;
+	}
+	public int getSteps() {
+		return this.stepsTaken;
 	}
 	
 	/**
