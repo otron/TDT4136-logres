@@ -1,5 +1,6 @@
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -14,6 +15,8 @@ public class Board {
 	final int K; //the size of the board, coincidentally also the number of queens in an optimal solution.
 	StringBuilder debugInfo; //I have no idea if this will work.
 	final int maxSteps; //part of the MIN-CONFLICTS algorithm
+	int stepsDone;
+	long timeTaken;
 	
 	
 	public Board(int K, int maxSteps) {
@@ -26,6 +29,7 @@ public class Board {
 	}
 	
 	public void doSteps() {
+		long startTime = new Date().getTime();
 		int counter = 0;
 		Random rng = new Random();
 		while (counter < this.maxSteps && !this.isOptimal()) {
@@ -58,6 +62,20 @@ public class Board {
 			//yeah I'm sure there's nothing that could go wrong here.
 			counter++;
 		}
+		this.stepsDone = counter;
+		this.timeTaken = (new Date().getTime()) - startTime;
+	}
+	
+	public String getResults() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Solution is optimal? ");
+		sb.append(this.isOptimal());
+		
+		sb.append("\n");
+		sb.append("Solution found in ");
+		sb.append(this.stepsDone + "/" + this.maxSteps);
+		
+		return sb.toString();
 	}
 	
 	/**
@@ -93,6 +111,7 @@ public class Board {
 		}
 		return res;
 	}
+	
 	/**
 	 * Generates the initial board-state per the assignment's specifications
 	 */
