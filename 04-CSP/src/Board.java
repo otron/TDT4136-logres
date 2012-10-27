@@ -10,6 +10,10 @@ import java.util.Random;
  */
 public class Board {
 	
+	public static void main(String args[]) {
+		Tests.timeTrial();
+	}
+	
 	int[] Q; //used to store the positions of placed queens. 
 		//Q[i] = k --> i is the row#, k is the column#
 	final int K; //the size of the board, coincidentally also the number of queens in an optimal solution.
@@ -64,18 +68,6 @@ public class Board {
 		}
 		this.stepsDone = counter;
 		this.timeTaken = (new Date().getTime()) - startTime;
-	}
-	
-	public String getResults() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Solution is optimal? ");
-		sb.append(this.isOptimal());
-		
-		sb.append("\n");
-		sb.append("Solution found in ");
-		sb.append(this.stepsDone + "/" + this.maxSteps);
-		
-		return sb.toString();
 	}
 	
 	/**
@@ -136,6 +128,41 @@ public class Board {
 		return true;
 		// This could be done on a queen-by-queen basis. I think that would be more elegant or whatevs.
 		// Whatevs.
+	}
+	
+	public String getResults() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Solution is optimal? ");
+		sb.append(this.isOptimal());
+		
+		sb.append("\n");
+		sb.append("Solution found in ");
+		sb.append(this.stepsDone + "/" + this.maxSteps);
+		
+		return sb.toString();
+	}
+	
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		boolean[][] k = new boolean[this.K][this.K];
+		for (int i = 0; i < this.K; i++)
+			k[i][this.Q[i]] = true;
+		
+		for (int i = 0; i < this.K; i++) {
+			for (int j = 0; j < this.K; j++) {
+				sb.append(k[i][j] ? "Q" : "X");
+				if (j+1 != this.K)
+					sb.append(" ");
+			}
+			if (i+1 != this.K)
+				sb.append("\n");
+		}
+		return sb.toString();
+	}
+	
+	public long getTimeTaken() {
+		return this.timeTaken;
 	}
 	
 	/**
