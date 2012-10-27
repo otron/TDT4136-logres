@@ -1,4 +1,6 @@
-import java.util.Date;
+import java.io.IOException;
+
+//import java.util.Date;
 
 //this is just for organizational purposes.
 public class Tests {
@@ -39,6 +41,43 @@ public class Tests {
 		}
 		System.out.println("#optimals: "+a);
 		System.out.println("#!optimal: "+b);
+		System.out.println();
 		System.out.println("avg steps: "+(double) steps/times);
+	}
+	
+	public static void timeSteps(int K, int n) {
+		System.err.println("Doing timeSteps with K="+K+", n="+n);
+		int maxSteps = 1000;
+		long steps = 0,
+			time = 0;
+		for (int i = 0; i < n; i++) {
+			Board b = new Board(K, maxSteps);
+			b.doSteps();
+			steps += b.getSteps();
+			time += b.getTimeTaken();
+		}
+		System.out.println("Steps: "+steps+", time: "+time);
+		System.out.println("time/step: "+(double)time/steps);
+	}
+	
+	public static void timeStepsForKRange(int n, int maxK) {
+		int maxSteps = 1000;
+		long steps, time;
+		long totalSteps = 0, totalTime = 0;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 4; i < maxK+1; i++) {
+			time = 0;
+			steps = 0;
+			for (int j = 0; j < n; j++) {
+				Board b = new Board(i, maxSteps);
+				b.doSteps();
+				steps += b.getSteps();
+				time += b.getTimeTaken();
+			}
+			totalSteps += steps;
+			totalTime += time;
+			sb.append("K="+i+";"+(double)time/steps+"\n");
+		}
+		System.out.println(sb.toString());
 	}
 }

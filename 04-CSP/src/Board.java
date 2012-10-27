@@ -12,7 +12,9 @@ public class Board {
 	
 	public static void main(String args[]) {
 		//Tests.timeTrial();
-		Tests.correctnessTest(1000, 1000, 10000);
+//		Tests.correctnessTest(1000, 10, 10000);
+//		Tests.timeSteps(100, 100);
+		Tests.timeStepsForKRange(100, 500);
 	}
 	
 	int[] Q; //used to store the positions of placed queens. 
