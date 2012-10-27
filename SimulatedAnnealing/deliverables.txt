@@ -1,4 +1,0 @@
-1. See src\general\EggCarton.java, SimAl.java, SimAlState.java
-2. see descriptions.txt
-3. see solutions.txt
-4. see 4.txt
