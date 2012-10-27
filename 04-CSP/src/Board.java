@@ -42,8 +42,34 @@ public class Board {
 	 * @param q The row to find conflicts for
 	 * @return An array with the number of conflicts
 	 */
-	private int[] getConflictsForRow(int q) {
+	private int[] findConflictsForRow(int n) {
 		int[] res = new int[this.K];
+		for (int i = 0; i < this.K; i++) {
+			if (i != n) {
+				/** Math that junk up.
+				 * 
+				 * All right. Listen up:
+				 * queen_i at [j][c] can cross row n at a maximum of three points:
+				 * [n][c] (straight line)
+				 * [n][c+d] (down-right if n>i, up-left if n<i)
+				 * [n][c-d] (down-left if n>i, up-right if n<i)
+				 * d = |n-i|
+				 * 
+				 * So what we are going to do is see if any of these three points exist on the grid
+				 * then just increase the value of the appropriate cell in res by one if they are.
+				 */
+				int c = this.Q[i],
+					d = Math.abs(n-i);
+				res[c]++; 		// [n][c]
+				if (c-d > -1)
+					res[c-d]++; // [n][c-d]
+				if (c+d < this.K)
+					res[c+d]++;	// [n][c+d]
+				//that was a lot easier than I expected
+			} else {
+				//do nothing
+			}
+		}
 		
 		return null;
 	}
