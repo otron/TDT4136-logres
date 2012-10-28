@@ -1,7 +1,10 @@
-plot 10-200, maxSteps=10k, +1.txt
-plot 100-1900, maxSteps=10k, +1.txt
+plot part 1.txt
+plot part 2.txt
 	K,T
 	Where K = you know what this is.
 	and T = average time until an optimal solution was found (five optimal solutions were generated)
 	I'm sorry it's not actually graphed.
+
+There's probably some sort of maxSteps-to-K ratio that's optimal. I did not try very hard to look for it.
+I did however manage to solve K = 11000 in less than 1min (averaged out of the time it took to find five solutions).
 

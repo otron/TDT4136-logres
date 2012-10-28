@@ -28,7 +28,7 @@ public class Tests {
 	public static void timeTests(int startK, int maxSteps, int n, long maxTime) {
 		System.err.println("Printing average ");
 		long time = 0;
-		for (int i = startK; time < maxTime; i+= 100) {
+		for (int i = startK; (double) time/n < maxTime; i+= 500) {
 			time = 0;
 			for (int j = 0; j < n; j++) {
 				Board b;

@@ -15,7 +15,7 @@ public class Board {
 //		Tests.correctnessTest(100, 5, 100000);
 //		Tests.timeSteps(100, 100);
 //		Tests.findMaxTime(100000, 60000);
-		Tests.timeTests(100, 10000, 5, 60000);
+		Tests.timeTests(1000, 100000, 5, 60000);
 	}
 	
 	int[] Q; //used to store the positions of placed queens. 
