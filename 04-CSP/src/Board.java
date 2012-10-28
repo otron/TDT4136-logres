@@ -12,9 +12,10 @@ public class Board {
 	
 	public static void main(String args[]) {
 		//Tests.timeTrial();
-//		Tests.correctnessTest(1000, 10, 10000);
+//		Tests.correctnessTest(100, 5, 100000);
 //		Tests.timeSteps(100, 100);
-		Tests.timeStepsForKRange(100, 500);
+//		Tests.findMaxTime(100000, 60000);
+		Tests.timeTests(100, 10000, 5, 60000);
 	}
 	
 	int[] Q; //used to store the positions of placed queens. 
@@ -39,7 +40,7 @@ public class Board {
 		long startTime = new Date().getTime();
 		int counter = 0;
 		Random rng = new Random();
-		while (counter < this.maxSteps && !this.isOptimal()) {
+		while (counter < this.maxSteps ){// && !this.isOptimal()) {
 			//First we select a random queen.
 			int q = rng.nextInt(this.K); //(a)
 			

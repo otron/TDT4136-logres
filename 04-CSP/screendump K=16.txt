@@ -1,0 +1,120 @@
+K=16, maxSteps=100
+Violations:14
+0:Q11. Violations:13
+1:Q12. Violations:12
+2:Q15. Violations:12
+3:Q8. Violations:11
+4:Q9. Violations:12
+5:Q8. Violations:12
+6:Q0. Violations:11
+7:Q13. Violations:11
+8:Q12. Violations:10
+9:Q10. Violations:9
+10:Q13. Violations:8
+11:Q5. Violations:9
+12:Q0. Violations:7
+13:Q1. Violations:7
+14:Q9. Violations:7
+15:Q14. Violations:8
+16:Q8. Violations:8
+17:Q2. Violations:9
+18:Q13. Violations:10
+19:Q5. Violations:10
+20:Q7. Violations:9
+21:Q6. Violations:8
+22:Q8. Violations:8
+23:Q5. Violations:8
+24:Q4. Violations:8
+25:Q15. Violations:8
+26:Q3. Violations:7
+27:Q13. Violations:7
+28:Q1. Violations:7
+29:Q15. Violations:7
+30:Q8. Violations:6
+31:Q9. Violations:6
+32:Q0. Violations:6
+33:Q6. Violations:6
+34:Q14. Violations:6
+35:Q2. Violations:6
+36:Q1. Violations:6
+37:Q9. Violations:6
+38:Q11. Violations:6
+39:Q9. Violations:6
+40:Q4. Violations:6
+41:Q2. Violations:6
+42:Q8. Violations:6
+43:Q14. Violations:6
+44:Q14. Violations:6
+45:Q3. Violations:6
+46:Q3. Violations:6
+47:Q0. Violations:6
+48:Q15. Violations:6
+49:Q6. Violations:6
+50:Q4. Violations:6
+51:Q8. Violations:6
+52:Q5. Violations:4
+53:Q12. Violations:4
+54:Q2. Violations:4
+55:Q6. Violations:4
+56:Q8. Violations:4
+57:Q4. Violations:4
+58:Q9. Violations:4
+59:Q4. Violations:4
+60:Q8. Violations:4
+61:Q15. Violations:4
+62:Q14. Violations:4
+63:Q6. Violations:4
+64:Q4. Violations:4
+65:Q14. Violations:4
+66:Q11. Violations:2
+67:Q9. Violations:2
+68:Q13. Violations:2
+69:Q3. Violations:2
+70:Q11. Violations:2
+71:Q1. Violations:2
+72:Q0. Violations:2
+73:Q4. Violations:2
+74:Q13. Violations:2
+75:Q3. Violations:2
+76:Q10. Violations:2
+77:Q4. Violations:2
+78:Q4. Violations:2
+79:Q15. Violations:2
+80:Q0. Violations:2
+81:Q6. Violations:2
+82:Q3. Violations:2
+83:Q4. Violations:2
+84:Q0. Violations:2
+85:Q1. Violations:2
+86:Q6. Violations:2
+87:Q10. Violations:2
+88:Q14. Violations:2
+89:Q13. Violations:2
+90:Q4. Violations:2
+91:Q4. Violations:2
+92:Q11. Violations:2
+93:Q9. Violations:2
+94:Q9. Violations:2
+95:Q1. Violations:2
+96:Q7. Violations:2
+97:Q3. Violations:2
+98:Q10. Violations:2
+99:Q11. Violations:2
+Solution is optimal? false
+Solution found in 100/100
+X X X X X Q X X X X X X X X X X
+X X X X X X X X X Q X X X X X X
+X X X X X X X X X X X X Q X X X
+X X X Q X X X X X X X X X X X X
+X X X X X X X Q X X X X X X X X
+X X Q X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X Q
+X Q X X X X X X X X X X X X X X
+X X X X X X X X X X Q X X X X X
+Q X X X X X X X X X X X X X X X
+X X X X X X Q X X X X X X X X X
+X X X X Q X X X X X X X X X X X
+X X X X X X X X X X X Q X X X X
+X X X X X X X X X X X X X X Q X
+X X X Q X X X X X X X X X X X X
+X X X X X X X X X X X X X Q X X

@@ -1,0 +1,22 @@
+K=8, maxSteps=100
+Violations:8
+0:Q1. Violations:7
+1:Q3. Violations:6
+2:Q5. Violations:5
+3:Q7. Violations:5
+4:Q2. Violations:4
+5:Q6. Violations:2
+6:Q5. Violations:2
+7:Q0. Violations:2
+8:Q7. Violations:0
+Violations:0
+Solution is optimal? true
+Solution found in 9/100
+X X X X X Q X X
+X X Q X X X X X
+Q X X X X X X X
+X X X X X X X Q
+X X X X Q X X X
+X Q X X X X X X
+X X X Q X X X X
+X X X X X X Q X

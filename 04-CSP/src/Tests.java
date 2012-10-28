@@ -25,6 +25,23 @@ public class Tests {
 		System.out.println("K="+counter+"; "+b.isOptimal()+"; "+timeElapsed +" ms");
 	}
 
+	public static void timeTests(int startK, int maxSteps, int n, long maxTime) {
+		System.err.println("Printing average ");
+		long time = 0;
+		for (int i = startK; time < maxTime; i+= 100) {
+			time = 0;
+			for (int j = 0; j < n; j++) {
+				Board b;
+				do {
+					b = new Board(i, maxSteps);
+					b.doSteps();
+					time += b.getTimeTaken();
+				} while (!b.isOptimal());
+				//time = time until the first correct solution was found
+			}
+			System.out.println(i+","+(double)time/n);
+		}
+	}
 	public static void correctnessTest(int K, int times, int maxSteps) {
 		System.err.println("Doing correctness test with K="+K+", maxSteps="+maxSteps+", n="+times);
 		int a = 0, b =0;
@@ -34,10 +51,10 @@ public class Tests {
 			board.doSteps();
 			if (board.isOptimal()) {
 				a++;
-				steps+=board.getSteps();
 			}
 			else
 				b++;
+			steps+=board.getSteps();
 		}
 		System.out.println("#optimals: "+a);
 		System.out.println("#!optimal: "+b);
@@ -61,7 +78,7 @@ public class Tests {
 	}
 	
 	public static void timeStepsForKRange(int n, int maxK) {
-		int maxSteps = 1000;
+		int maxSteps = 10;
 		long steps, time;
 		long totalSteps = 0, totalTime = 0;
 		StringBuilder sb = new StringBuilder();
@@ -79,5 +96,17 @@ public class Tests {
 			sb.append("K="+i+";"+(double)time/steps+"\n");
 		}
 		System.out.println(sb.toString());
+	}
+	
+	public static void findMaxTime(int maxSteps, long maxTime) {
+		long time = 0;
+		int K = 10000;
+		do {
+			Board b = new Board(K, maxSteps);
+			b.doSteps();
+			time = b.getTimeTaken();
+			System.out.println("K="+K+";"+time);
+			K += 100000;
+		} while (time < maxTime);
 	}
 }

@@ -1,0 +1,7 @@
+plot 10-200, maxSteps=10k, +1.txt
+plot 100-1900, maxSteps=10k, +1.txt
+	K,T
+	Where K = you know what this is.
+	and T = average time until an optimal solution was found (five optimal solutions were generated)
+	I'm sorry it's not actually graphed.
+
