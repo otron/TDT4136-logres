@@ -25,6 +25,23 @@ public class Tests {
 		System.out.println("K="+counter+"; "+b.isOptimal()+"; "+timeElapsed +" ms");
 	}
 
+	public static void testK(int K, int maxSteps) {
+		long time = 0;
+		long steps = 0;
+		int counter = 0;
+		Board b;
+		do {
+			b = new Board(K, maxSteps);
+			b.doSteps();
+			time += b.getTimeTaken();
+			counter++;
+			steps += b.getSteps();
+		} while (!b.isOptimal());
+		System.out.println("Optimal solution for K="+K+" found.");
+		System.out.println("Time: "+time +" ms");
+		System.out.println("Runs: "+counter);
+		System.out.println("Step: "+steps);
+	}
 	public static void timeTests(int startK, int maxSteps, int n, long maxTime) {
 		System.err.println("Printing average ");
 		long time = 0;
@@ -64,7 +81,7 @@ public class Tests {
 	
 	public static void timeSteps(int K, int n) {
 		System.err.println("Doing timeSteps with K="+K+", n="+n);
-		int maxSteps = 1000;
+		int maxSteps = 100000;
 		long steps = 0,
 			time = 0;
 		for (int i = 0; i < n; i++) {

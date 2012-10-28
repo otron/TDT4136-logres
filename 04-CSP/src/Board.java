@@ -11,11 +11,12 @@ import java.util.Random;
 public class Board {
 	
 	public static void main(String args[]) {
-		//Tests.timeTrial();
+//		Tests.timeTrial();
 //		Tests.correctnessTest(100, 5, 100000);
-//		Tests.timeSteps(100, 100);
+//		Tests.timeSteps(11500, 10);
 //		Tests.findMaxTime(100000, 60000);
-		Tests.timeTests(1000, 100000, 5, 60000);
+//		Tests.timeTests(1000, 100000, 5, 60000);
+		Tests.testK(100000, 1000000);
 	}
 	
 	int[] Q; //used to store the positions of placed queens. 
