@@ -1,0 +1,702 @@
+% Sets page margins to 1", which is standard
+% allows the included extensions of graphic files
+% sets graphic path, does not currently work because of space in folder name
+% I do not remember what this does
+% allows the xhead parameters
+% replace with your name
+% replace 
+
+
+\documentclass{article}
+\usepackage{amsfonts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage[pdftex]{graphicx}
+
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Created=Monday, January 30, 2012 17:20:46}
+%TCIDATA{LastRevised=Sunday, November 04, 2012 20:25:56}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\geometry{left=1in,right=1in,top=1in,bottom=1in} 
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\graphicspath{{D:/Dropbox/Private/BEHOLD SCIENCE/TDT4145/ov/01/}}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+\lhead{Odd M. Trondrud [trondrud]}
+\rhead{TDT4136 Exercise 05}
+\input{tcilatex}
+\begin{document}
+
+
+\setcounter{secnumdepth}{2} %\title{TITLE}
+%\author{Odd M. Trondrud}
+%\maketitle
+
+% INCLUDEGRAPHICS EXPLANATION
+% \includegraphics[scale=1]{name of file}
+% sometimes you want to twice encase the filename in squiggly brackets. I do not know why but sometimes it is required.
+
+% begin title page, use \\ for newline
+
+% now one can list the authors, \textbf{} makes bold text
+
+\section{Models and Entailment in Propositional Logic}
+
+\subsection{Page 279, Exercise 7.1}
+
+"Build the complete model table and show both entailments using model
+checking."
+
+32 worlds? Ungh that is way too much work.
+
+\subsection{Page 280, Exercise 7.4}
+
+\subsubsection{a. $False\models True$}
+
+If I've understood the exercise description correctly then:\ no. I\ made a
+model table to illustrate why I\ believe so:
+
+\begin{tabular}{|c|c|}
+\hline
+False & True \\ \hline
+0 & 1 \\ \hline
+\end{tabular}
+
+\subsubsection{b. $True\models False$}
+
+I\ guess... see a)?
+
+\subsubsection{c. $\left( A\wedge B\right) \models \left( A\Leftrightarrow
+B\right) $}
+
+Yes. Because:\ see the exercise description.
+
+\subsubsection{d. $A\Leftrightarrow B\models A\vee B$}
+
+Yes, because the RHS is true in all the models in which the LHS is true.
+
+\subsubsection{e. $A\Leftrightarrow B\models \lnot A\vee B$}
+
+\[
+\begin{tabular}{|c|c|c|c|}
+\hline
+$A$ & $B$ & $A\Leftrightarrow B$ & $\lnot A\vee B$ \\ \hline
+0 & 0 & 1 & 1 \\ \hline
+0 & 1 & 0 & 1 \\ \hline
+1 & 0 & 0 & 0 \\ \hline
+1 & 1 & 1 & 1 \\ \hline
+\end{tabular}%
+\]
+
+Who would've thought it. Yes.
+
+\subsubsection{f. $\left( A\vee B\right) \wedge \left( \lnot C\vee \lnot
+D\vee E\right) \models \left( A\vee B\vee C\right) \wedge \left( B\wedge
+C\wedge D\Rightarrow E\right) $}
+
+\begin{eqnarray}
+\left( B\wedge C\wedge D\Rightarrow E\right) &\equiv &\lnot \left( B\wedge
+C\wedge D\right) \vee E  \TCItag{implication elimination} \\
+\lnot \left( B\wedge C\wedge D\right) &\equiv &\left( \lnot B\vee \lnot
+C\vee \lnot D\right)  \TCItag{De Morgan} \\
+\left( A\vee B\vee C\right) \wedge \left( B\wedge C\wedge D\Rightarrow
+E\right) &\equiv &\left( A\vee B\vee C\right) \wedge \left( \lnot B\vee
+\lnot C\vee \lnot D\vee E\right)  \nonumber \\
+&&...  \nonumber \\
+\left( A\vee B\right) \wedge \left( \lnot C\vee \lnot D\vee E\right)
+&\models &\left( A\vee B\vee C\right) \wedge \left( \lnot B\vee \lnot C\vee
+\lnot D\vee E\right)  \nonumber
+\end{eqnarray}
+
+Yes. Because $\left( A\vee B\right) \models \left( A\vee B\vee C\right) $
+and $\left( \lnot C\vee \lnot D\vee E\right) \models \left( \lnot B\vee
+\lnot C\vee \lnot D\vee E\right) $
+
+\subsubsection{g. $\left( A\vee B\right) \wedge \left( \lnot C\vee \lnot
+D\vee E\right) \models \left( A\vee B\right) \wedge \left( \lnot D\vee
+E\right) $}
+
+Uhh... No!\ Because $\left( \lnot C\vee \lnot D\vee E\right) \not\models
+\left( \lnot D\vee E\right) $.
+
+In a model where we have $\lnot C$, $D$ and $\lnot E$, $\left( \lnot C\vee
+\lnot D\vee E\right) $ will be true (because of $\lnot C$), whle $\left(
+\lnot D\vee E\right) $ will not be true as neither $\lnot D$ or $E$.
+
+\subsubsection{h. $\left( A\vee B\right) \wedge \lnot \left( A\Rightarrow
+B\right) $ is satisfiable.}
+
+Now well I\ don't know what "is satisfiable"\ means.
+
+Maybe it means that it's not a contradiction?
+
+Yeah, I\ like the sound of that. It's simple enough for me to handle.
+
+Aaand yes, it is satisfiable: $\lnot \left( A\Rightarrow B\right) $ is true
+when $A$ is false and $B$ is true, in this model $A\vee B$ is also true so
+the entire thing is true.
+
+\subsubsection{i. $\left( A\wedge B\right) \Rightarrow C\models \left(
+A\Rightarrow C\right) \vee \left( B\Rightarrow C\right) $}
+
+\begin{eqnarray}
+\left( A\Rightarrow C\right) \vee \left( B\Rightarrow C\right)  &\equiv
+&\left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right)  
+\TCItag{implication elimination} \\
+\left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right)  &\equiv &\lnot
+A\vee C\vee \lnot B\vee C  \nonumber \\
+\lnot A\vee C\vee \lnot B\vee C &\equiv &\lnot A\vee \lnot B\vee C 
+\TCItag{$C\vee C\equiv C$}
+\end{eqnarray}
+
+\begin{eqnarray}
+\left( \left( A\wedge B\right) \Rightarrow C\right)  &\equiv &\lnot \left(
+A\wedge B\right) \vee C  \TCItag{implication elimination} \\
+\lnot \left( A\wedge B\right) \vee C &\equiv &\lnot A\vee \lnot B\vee C 
+\TCItag{De Morgan}
+\end{eqnarray}
+
+So...
+
+\[
+\lnot A\vee \lnot B\vee C\models \lnot A\vee \lnot B\vee C
+\]
+
+Yes?
+
+\subsubsection{j. $\left( C\vee \left( \lnot A\wedge \lnot B\right) \right)
+\equiv \left( \left( A\Rightarrow C\right) \vee \left( B\Rightarrow C\right)
+\right) $}
+
+\begin{equation}
+\left( C\vee \left( \lnot A\wedge \lnot B\right) \right) \equiv \left(
+\left( C\vee \lnot A\right) \wedge \left( C\vee \lnot B\right) \right)  
+\tag{distributivity of $\vee $ over $\wedge $}
+\end{equation}
+
+From i. we know that $\left( A\Rightarrow C\right) \vee \left( B\Rightarrow
+C\right) \equiv \left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right) 
+$
+
+So:$\left( \left( C\vee \lnot A\right) \wedge \left( C\vee \lnot B\right)
+\right) \equiv \left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right) $
+?
+
+Answer:\ No. Because if $\lnot C$, $B$, $\lnot A$ then the LHS will be
+false, but the RHS\ will be true. 
+
+\subsubsection{k. $\left( A\Leftrightarrow B\right) \wedge \left( \lnot
+A\vee B\right) $ is satisfiable.}
+
+Hey, wait, this looks a lot like e.
+
+Oh look I\ already made a truth table for this. For your ease-of-viewing,
+I've copied it here:
+
+\[
+\begin{tabular}{|c|c|c|c|}
+\hline
+$A$ & $B$ & $A\Leftrightarrow B$ & $\lnot A\vee B$ \\ \hline
+0 & 0 & 1 & 1 \\ \hline
+0 & 1 & 0 & 1 \\ \hline
+1 & 0 & 0 & 0 \\ \hline
+1 & 1 & 1 & 1 \\ \hline
+\end{tabular}%
+\]
+
+From this we see that, yes, it is satisfiable.
+
+\subsubsection{l. $\left( A\Leftrightarrow B\right) \Leftrightarrow C$ has
+the same number of models as $\left( A\Leftrightarrow B\right) $ for any
+fixed set of proposition symbols that include $A$, $B$, $C$.}
+
+Uhm, what? I\ just made a truth table. 'Cause I\ don't know what is being
+asked of me.
+
+\[
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$A$ & $B$ & $C$ & $A\Leftrightarrow B$ & $\left( A\Leftrightarrow B\right)
+\Leftrightarrow C$ \\ \hline
+0 & 0 & 0 & 1 & 0 \\ \hline
+0 & 0 & 1 & 1 & 1 \\ \hline
+0 & 1 & 0 & 0 & 1 \\ \hline
+0 & 1 & 1 & 0 & 0 \\ \hline
+1 & 0 & 0 & 0 & 1 \\ \hline
+1 & 0 & 1 & 0 & 0 \\ \hline
+1 & 1 & 0 & 1 & 0 \\ \hline
+1 & 1 & 1 & 1 & 1 \\ \hline
+\end{tabular}%
+\]
+
+\bigskip 
+
+\subsection{Page 281, Exercise 7.7}
+
+Consider a vocabulary with only four propositions, $A$, $B$, $C$, and $D$.
+How many models are there for the following sentences?
+
+\subsubsection{a. $B\vee C$}
+
+From page 240, "Model":
+
+"[...] models are mathematical abstractions, each of which simply fixes the
+truth or falsehood of every relevant sentence."
+
+Also:
+
+"If a sentence $\alpha $ is true in model $m$, we say that $m$ satisfies $%
+\alpha $ or sometimes $m$ is a model of $\alpha $."
+
+So, is the exercise asking me how many models there are in which $\alpha $
+is true?
+
+Because that is what I\ am going to answer.
+
+There exists $2^{n}$ unique possible models for a sentence sentence
+involving $n$ unique propositions. 
+
+$A\vee B$ has $2^{2}=\allowbreak 4$ unique models, three of which are models
+of $A\vee B$. Since we have $16$ unique models in total for our vocabulary,
+each of the four unique models for $A\vee B$ are repeated four times. This
+means that there are $\dfrac{3}{4}\cdot 2^{4}=\allowbreak 12$ models of $%
+A\vee B$.
+
+\subsubsection{b. $\lnot A\vee \lnot B\vee \lnot C\vee \lnot D$}
+
+$2^{4}-1=\allowbreak 15$ (the only model in which it is false is the one in
+which $A\wedge B\wedge C\wedge D$ is true)
+
+\subsubsection{c. $\left( A\Rightarrow B\right) \wedge A\wedge \lnot B\wedge
+C\wedge D$}
+
+Well okay so first off this can only be true if $A$ and $\lnot B$ and $C$
+and $D$, giving us one possible model. In this, however, $A\Rightarrow B$ is
+false as $A$ is true while $B$ is false.
+
+So zero. ZERO.
+
+\subsection{Page 281, Exercise 7.10}
+
+(In this exercise, \textit{neither} means \textit{satisfiable but not valid.}%
+)
+
+"Decide whether each of the following sentences is valid, unsatisfiable, or
+neither. Verify your decisions using truth tables or the equivalence rules
+of Figure 7.11.
+
+DOES\ VALID\ MEAN\ THE\ SAME\ THING\ AS TAUTOLOGY? YES\ IT\ DOES. I\
+CHECKED\ WIKIPEDIA.
+
+\subsubsection{a. $Smoke\Rightarrow Smoke$}
+
+Oh come on now.
+
+\begin{equation}
+A\Rightarrow A\equiv \lnot A\vee A  \tag{implication elimination}
+\end{equation}
+
+$\lnot A\vee A$ is a tautology.
+
+So... it's valid.
+
+\subsubsection{b. $Smoke\Rightarrow Fire$}
+
+\[
+\begin{tabular}{|c|c|c|}
+\hline
+$A$ & $B$ & $A\Rightarrow B$ \\ \hline
+0 & 0 & 1 \\ \hline
+0 & 1 & 0 \\ \hline
+1 & 0 & 1 \\ \hline
+1 & 1 & 1 \\ \hline
+\end{tabular}%
+\]
+
+It is... \textit{neither.}
+
+\subsubsection{c. $\left( Smoke\Rightarrow Fire\right) \Rightarrow \left(
+\lnot Smoke\Rightarrow \lnot Fire\right) $}
+
+\[
+\begin{tabular}{|c|c|c|c|}
+\hline
+$A$ & $B$ & $A\Rightarrow B$ & $\lnot A\Rightarrow \lnot B$ \\ \hline
+0 & 0 & 1 & 1 \\ \hline
+0 & 1 & 0 & 1 \\ \hline
+1 & 0 & 1 & 0 \\ \hline
+1 & 1 & 1 & 1 \\ \hline
+\end{tabular}%
+\]
+
+Again, \textit{neither.}
+
+\subsubsection{d. $Smoke\vee Fire\vee \lnot Fire$}
+
+It's valid because $\left( Fire\vee \lnot Fire\right) $ is valid ($True\vee A
+$ is valid).
+
+\subsubsection{e. $\left( \left( Smoke\wedge Heat\right) \Rightarrow
+Fire\right) \Leftrightarrow \left( \left( Smoke\Rightarrow Fire\right) \vee
+\left( Heat\Rightarrow Fire\right) \right) $}
+
+\[
+\left( \left( A\wedge C\right) \Rightarrow B\right) \Leftrightarrow \left(
+\left( A\Rightarrow B\right) \vee \left( C\Rightarrow B\right) \right) 
+\]
+
+\begin{eqnarray}
+\left( \left( A\wedge C\right) \Rightarrow B\right)  &\equiv &\lnot \left(
+A\wedge C\right) \vee B  \TCItag{implication elimination} \\
+\lnot \left( A\wedge C\right) \vee B &\equiv &\lnot A\vee \lnot C\vee B 
+\TCItag{De Morgan}
+\end{eqnarray}
+
+\begin{eqnarray}
+\left( \left( A\Rightarrow B\right) \vee \left( C\Rightarrow B\right)
+\right)  &\equiv &\left( \lnot A\vee B\right) \vee \left( \lnot C\vee
+B\right)   \TCItag{implication elimination} \\
+\left( \lnot A\vee B\right) \vee \left( \lnot C\vee B\right)  &\equiv &\lnot
+A\vee \lnot C\vee B  \nonumber
+\end{eqnarray}
+
+We see that both sides of the $\Leftrightarrow $ are equivalent. So it's
+valid.
+
+(Doubt it?\ Check out Figure 7.8 on page 246)
+
+\subsubsection{f. $Big\vee Dumb\vee \left( Big\Rightarrow Dumb\right) $}
+
+\begin{eqnarray}
+D\vee E\vee \left( D\Rightarrow E\right)  &\equiv &D\vee E\vee \lnot D\vee E
+\TCItag{implication elimination} \\
+D\vee E\vee \lnot D\vee E &\equiv &D\vee \lnot D\vee E  \nonumber \\
+D\vee \lnot D\vee E &\equiv &True\vee E  \nonumber
+\end{eqnarray}
+
+Valid.
+
+\subsubsection{g. $\left( Big\wedge Dumb\right) \vee \lnot Dumb$}
+
+\[
+\begin{tabular}{|c|c|c|c|}
+\hline
+$D$ & $E$ & $D\wedge E$ & $\left( D\wedge E\right) \vee \lnot E$ \\ \hline
+0 & 0 & 0 & 1 \\ \hline
+0 & 1 & 0 & 0 \\ \hline
+1 & 0 & 0 & 1 \\ \hline
+1 & 1 & 1 & 1 \\ \hline
+\end{tabular}%
+\]
+
+\textit{Neither.}
+
+\subsection{5. At this point, I\ notice I\ didn't have to do \textit{all}
+the parts of all the questions.}
+
+"Consider a logical knowledge base with 100 variables, $A_{1},...,A_{100}$.
+This will have $Q=2^{100}$ possible models. For each logical sentence below,
+give the number of models that satisfy it. Feel free to express your answer
+as a fraction of $Q$, or to use other symbols to represent large numbers.
+
+\subsubsection{a. $A_{1}\vee A_{73}$}
+
+Again, a sentence consisting of $n$ unique variables has $2^{n}$ unique
+possible models. For a KB\ with $z$ unique variables, a sentence $S\ $which
+includes $d$ of these has $2^{d}$ unique possible models. That is to say,
+there are only $2^{d}$ unique configurations of the truth values of the
+variables of $S$. The remaining $2^{z-d}$ possible models are, with regards
+to $S$, not unique. If there are $x$ unique models that satisfy $S$ (out of
+the $2^{d}$ unique models), then there are $x\cdot \left( 2^{z-d}\right) =%
+\dfrac{x\cdot 2^{z}}{2^{d}}$ models that satisfy $S$ in the entire KB.
+
+So!
+
+$A_{1}\vee A_{73}$ is satisfied by $3$ unique models.
+
+$3\cdot \left( 2^{100-2}\right) $
+
+Alternatively we could say that $A_{1}\vee A_{73}$ is satisfied by a three
+fourths of all the possible models.
+
+\[
+\dfrac{3}{4}\cdot 2^{100}=3\cdot 2^{98}
+\]
+
+I have, by the way, no idea if this is correct.
+
+\subsubsection{b. $A_{7}\vee \left( A_{19}\wedge A_{33}\right) $}
+
+Oooh!
+
+For $S_{b1}=A_{19}\wedge A_{33}$ there exists four unique models. $S_{b1}$
+is true in one of these (the one in which they both are true).
+
+$S_{b2}=A_{7}$ is true in half of the models it is featured in.
+
+$S_{b3}=S_{b2}\vee S_{b1}$ is true in five out of eight models (that one
+model where $\lnot A_{7}\wedge S_{b1}$ is true, and those other four in
+which $A_{7}$ is true)
+
+\[
+\dfrac{5}{2^{3}}\cdot 2^{100}=5\cdot 2^{97}
+\]
+
+\subsubsection{c. $A_{11}\rightarrow A_{22}$}
+
+\[
+3\cdot 2^{98}
+\]
+
+\section{Resolution in Propositional Logic}
+
+\subsection{Convert each of the following sentences to Conjunctive Normal
+Form (CNF).}
+
+Right, so CNF is a sentence consisting only of $\vee $ and $\wedge $ (where
+distributy of $\vee $ over $\wedge $ is applied wherever possible)\ and
+where $\lnot $ only appears in literals. OK!
+
+\subsubsection{a. $A\wedge B\wedge C$}
+
+Hah!\ Trick question, it's already in CNF. ($A$, $B$ and $C$ are all
+literals, and there's nothing anywhere as far as I\ can see about a clause
+having to contain more than one literal).
+
+\subsubsection{b. $A\vee B\vee C$}
+
+Again, it's already in CNF because $\left( A\vee B\vee C\right) $ is a valid
+clause and a CNF-sentence doesn't need to contain more than one clause.
+
+\subsubsection{c. $A\Rightarrow \left( B\vee C\right) $}
+
+\[
+A\Rightarrow \left( B\vee C\right) \equiv \lnot A\vee \left( B\vee C\right)
+\equiv \left( \lnot A\vee B\vee C\right) 
+\]
+
+\subsubsection{d. $\left( A\vee \lnot C\right) \Rightarrow B$}
+
+\begin{eqnarray}
+\left( \left( A\vee \lnot C\right) \Rightarrow B\right)  &\equiv &\lnot
+\left( A\vee \lnot C\right) \vee B  \TCItag{implication elimination} \\
+\lnot \left( A\vee \lnot C\right) \vee B &\equiv &\left( \lnot A\wedge
+C\right) \vee B  \TCItag{De Morgan} \\
+\left( \lnot A\wedge C\right) \vee B &\equiv &\left( \left( B\vee \lnot
+A\right) \wedge \left( B\vee C\right) \right)   \TCItag{distributivity of
+$\vee $ over $\wedge $}
+\end{eqnarray}
+
+\subsection{Consider the following Knowledge Base (KB):}
+
+\begin{itemize}
+\item $\left( A\vee \lnot B\right) \Rightarrow \lnot C$
+
+\item $D\wedge E\Rightarrow C$
+
+\item $A\wedge D$
+\end{itemize}
+
+Use resolution to show that $KB\models \lnot E$
+
+You know this is really hard for me as I've never before seen a KB\
+displayed as a bulleted list. Or is each item a new KB?
+
+\section{Representations in First-Order Logic}
+
+\subsection{Page 316, Exercise 8.9}
+
+Consider a vocabulary with the following symbols:
+
+$Occupation(p,o)$:\ Predicate. Person $p$ has occupation $o$.
+
+$Customer\left( p1,p2\right) $:\ Predicate. Person $p1$ is a customer of
+person $p2$.
+
+$Boss\left( p1,p2\right) $: Predicate. Person $p1$ is a boss of person $p2$.
+
+\textit{Doctor, Surgeon, Lawyer, Actor}:\textit{\ }Constants denoting
+occupations.
+
+\textit{Emily, Joe}: Constants denoting people.
+
+Use these symbols to write the following assertions in first-order logic:
+
+\subsubsection{a. Emily is either a surgeon or a lawyer.}
+
+\[
+Occupation(Emily,\text{ }Surgeon)\vee Occupation(Emily,\text{ }Lawyer)
+\]
+
+\subsubsection{b. Joe is an actor, but he also holds another job.}
+
+\[
+Occupation(Joe,\text{ }Actor)\wedge Occupation(Joe,\text{ }Doctor\vee
+Surgeon\vee Lawyer)
+\]
+
+\subsubsection{c. All surgeons are doctors}
+
+\[
+\forall p\left( Occupation(p,\text{ }Surgeon\right) \Rightarrow Occupation(p,%
+\text{ }Doctor)
+\]
+
+\subsection{Page 319, Exercise 8.21}
+
+Arithmetic assertions can be written in first-order logic with the predicate
+symbol $<$, the function symbols $+$ and $\times $, and the constant symbols 
+$0$ and $1$. Additional predicates can also be defined with biconditionals.
+
+\subsubsection{a. Represent the property "$x$ is an even number."}
+
+\textit{Even}$\left( x\right) \Leftrightarrow \left( x\func{mod}2=0\right) $
+
+\subsubsection{b. Represent the property "x is prime."}
+
+\textit{Prime}$\left( x\right) \Leftrightarrow \lnot \exists \left( y\in 
+%TCIMACRO{\U{2124} }%
+%BeginExpansion
+\mathbb{Z}
+%EndExpansion
+\right) $ $\left( \left( x\div y\right) \in 
+%TCIMACRO{\U{2124} }%
+%BeginExpansion
+\mathbb{Z}
+%EndExpansion
+\right) \wedge 2<y<x$
+
+uh, basically what I'm trying to say is:\ if x is prime then there is no $%
+y\in 
+%TCIMACRO{\U{2124} }%
+%BeginExpansion
+\mathbb{Z}
+%EndExpansion
+$, $2<y<x$, for which $x\div y=$ some integer
+
+\subsubsection{c.\ Goldbach's conjecture is the conjecture (unproven as of
+yet) that every even number is equal to the sum of two primes. Represent
+this conjecture as a logical sentence.}
+
+\textit{Even}$\left( x\right) \Leftrightarrow \exists $ $y,$ $z$ \textit{%
+Prime}$\left( y\right) \wedge $\textit{Prime}$\left( z\right) \wedge \left(
+y+z=x\right) $
+
+\subsection{Page 319, Exercise 8.23}
+
+Write in first-order logic the assertion that every key and at least one of
+every pair of socks will eventually be lost forever, using only the
+following vocabulary: $Key\left( x\right) $, $x$ is a key; $Sock\left(
+x\right) $, $x$ is a sock; $Pair\left( x,y\right) $, $x$ and $y$ are a pair; 
+$Now$, the current time; $Before\left( t_{1},t_{2}\right) $, time $t_{1}$
+comes before $t_{2};$ Lost$\left( x,t\right) $, object $x$ is lost at time $t
+$.
+
+$\forall x$ $Key\left( x\right) \Rightarrow \exists t$ $Lost\left(
+x,t\right) $
+
+Wait. $\forall x$ $\exists y$ \textit{Pair}$\left( x,y\right) $ ?
+
+Because if not then ahh fuck it I'm stumped.
+
+\subsection{Page 319, Exercise 8.24}
+
+Translate into first-order logic the sentence:\ "Everyone's DNA is unique
+and is derived from their parents' DNA."\ You must specify the precise
+intended meaning of your vocabulary terms. (\textit{Hint:} Do not use the
+predicate \textit{Unique}$\left( x\right) $, since uniqueness is not really
+a property of an object itself!)
+
+$\forall x$ $DNA\left( x\right) \Longrightarrow \lnot \exists y$ $DNA\left(
+y\right) \wedge Equal\left( x,y\right) \wedge Derived\left( DNA\left(
+Parent\left( x\right) \right) \right) $
+
+\section{Resolution in First-Order Logic}
+
+\subsection{Find the unifier $\left( \protect\theta \right) $ - if possible
+- for each pair of atomic sentences. Here, Owner, Horse and Rides are
+predicates while FastestHorse is a function that maps a person to the name
+of heir fastest horse:}
+
+\subsubsection{a. Horse$\left( x\right) $ ... Horse$\left( \text{Rocky}%
+\right) $ Answer: $\protect\theta =\{x/Rocky\}$}
+
+\subsubsection{b. Owner(Leo,Rocky) ... Owner(x,y)}
+
+Answer:\ $\theta =\{x/Leo,y/Rocky\}$
+
+\subsubsection{c. Owner(Leo,x) ... Owner(y, Rocky)}
+
+Answer: $\theta =\{y/Leo,x/Rocky\}$
+
+\subsubsection{d. Owner(Leo,x) ... Rides(Leo,Rocky)}
+
+Answer: $\theta =\{x/Rocky\}$
+
+\subsection{Use resolution to prove Green(Linn)\ given the information
+below. You must first convert each sentence into CNF. Feel free to show only
+the applications of the resolution rule that lead to the desired conclusion.
+For each application of the resolution rule, show the unification bindings, $%
+\protect\theta .$}
+
+\begin{itemize}
+\item $Hybrid\left( \text{\textit{Prius}}\right) $
+
+\item Drives$\left( Linn,\text{ \textit{Prius}}\right) $
+
+\item $\forall x:Green\left( x\right) \Leftrightarrow Bikes\left( x\right)
+\vee \left[ \exists y:Drives\left( x,y\right) \wedge Hybrid\left( y\right) %
+\right] $
+\end{itemize}
+
+$Hybrid\left( \text{\textit{Prius}}\right) $ ... $Hybrid\left( y\right) $
+
+$\theta =\{y/$\textit{Prius}$\}$
+
+Drives$\left( Linn,\text{ \textit{Prius}}\right) $ ... $Drives\left( x,\text{%
+\textit{Prius}}\right) $
+
+$\theta =\{x/Linn,$ $y/$\textit{Prius}$\}$
+
+$Green\left( x\right) $ ... $Drives\left( Linn,\text{\textit{Prius}}\right)
+\wedge Hybrid\left( \text{\textit{Prius}}\right) $
+
+$\theta =\{x/Linn,$ $y/$\textit{Prius}$\}$
+
+Did I\ mention that I\ have no idea what I\ am doing?
+%we write $\alpha \models \beta $ to mean that the sentence $\alpha $ entails
+%the sentence $\beta $. The formal defintion of entailment is this: $\alpha
+%\models \beta $ if and only if, in every model in which $\alpha $ is true, $%
+%\beta $ is also true. We can write: $\alpha \models \beta $ if and only if $%
+%M\left( \alpha \right) \subseteq M\left( \beta \right) $.
+\end{document}
