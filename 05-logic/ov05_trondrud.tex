@@ -1,16 +1,7 @@
-% Sets page margins to 1", which is standard
-% allows the included extensions of graphic files
-% sets graphic path, does not currently work because of space in folder name
-% I do not remember what this does
-% allows the xhead parameters
-% replace with your name
-% replace 
-
 
 \documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amsfonts}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{geometry}
 \usepackage{fancyhdr}
 \usepackage[pdftex]{graphicx}
@@ -20,7 +11,7 @@
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=Manual}
 %TCIDATA{Created=Monday, January 30, 2012 17:20:46}
-%TCIDATA{LastRevised=Sunday, November 04, 2012 20:25:56}
+%TCIDATA{LastRevised=Friday, November 16, 2012 15:27:04}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
 %TCIDATA{CSTFile=40 LaTeX article.cst}
@@ -83,18 +74,13 @@ checking."
 
 \subsubsection{a. $False\models True$}
 
-If I've understood the exercise description correctly then:\ no. I\ made a
-model table to illustrate why I\ believe so:
-
-\begin{tabular}{|c|c|}
-\hline
-False & True \\ \hline
-0 & 1 \\ \hline
-\end{tabular}
+Yes. The LHS (false)\ is true in no models, while the RHS (True)\ is true in 
+\textit{all} models. So the RHS is true in all the models in which the LHS\
+is true which is what entailment requires.
 
 \subsubsection{b. $True\models False$}
 
-I\ guess... see a)?
+Nope. 
 
 \subsubsection{c. $\left( A\wedge B\right) \models \left( A\Leftrightarrow
 B\right) $}
@@ -103,7 +89,18 @@ Yes. Because:\ see the exercise description.
 
 \subsubsection{d. $A\Leftrightarrow B\models A\vee B$}
 
-Yes, because the RHS is true in all the models in which the LHS is true.
+\[
+\begin{tabular}{|c|c|c|c|}
+\hline
+$A$ & $B$ & $A\Leftrightarrow B$ & $A\vee B$ \\ \hline
+0 & 0 & 1 & 0 \\ \hline
+0 & 1 & 0 & 1 \\ \hline
+1 & 0 & 0 & 1 \\ \hline
+1 & 1 & 1 & 1 \\ \hline
+\end{tabular}%
+\]
+
+Nope. See the model in which $\lnot A\wedge \lnot B$.
 
 \subsubsection{e. $A\Leftrightarrow B\models \lnot A\vee B$}
 
@@ -170,17 +167,17 @@ the entire thing is true.
 A\Rightarrow C\right) \vee \left( B\Rightarrow C\right) $}
 
 \begin{eqnarray}
-\left( A\Rightarrow C\right) \vee \left( B\Rightarrow C\right)  &\equiv
-&\left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right)  
+\left( A\Rightarrow C\right) \vee \left( B\Rightarrow C\right) &\equiv
+&\left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right) 
 \TCItag{implication elimination} \\
-\left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right)  &\equiv &\lnot
+\left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right) &\equiv &\lnot
 A\vee C\vee \lnot B\vee C  \nonumber \\
 \lnot A\vee C\vee \lnot B\vee C &\equiv &\lnot A\vee \lnot B\vee C 
 \TCItag{$C\vee C\equiv C$}
 \end{eqnarray}
 
 \begin{eqnarray}
-\left( \left( A\wedge B\right) \Rightarrow C\right)  &\equiv &\lnot \left(
+\left( \left( A\wedge B\right) \Rightarrow C\right) &\equiv &\lnot \left(
 A\wedge B\right) \vee C  \TCItag{implication elimination} \\
 \lnot \left( A\wedge B\right) \vee C &\equiv &\lnot A\vee \lnot B\vee C 
 \TCItag{De Morgan}
@@ -189,7 +186,7 @@ A\wedge B\right) \vee C  \TCItag{implication elimination} \\
 So...
 
 \[
-\lnot A\vee \lnot B\vee C\models \lnot A\vee \lnot B\vee C
+\lnot A\vee \lnot B\vee C\models \lnot A\vee \lnot B\vee C 
 \]
 
 Yes?
@@ -198,22 +195,52 @@ Yes?
 \equiv \left( \left( A\Rightarrow C\right) \vee \left( B\Rightarrow C\right)
 \right) $}
 
-\begin{equation}
-\left( C\vee \left( \lnot A\wedge \lnot B\right) \right) \equiv \left(
+\begin{eqnarray}
+\left( C\vee \left( \lnot A\wedge \lnot B\right) \right)  &\equiv &\left(
 \left( C\vee \lnot A\right) \wedge \left( C\vee \lnot B\right) \right)  
-\tag{distributivity of $\vee $ over $\wedge $}
+\TCItag{distributivity of $\vee $ over $\wedge $} \\
+\left( \left( C\vee \lnot A\right) \wedge \left( C\vee \lnot B\right)
+\right)  &\equiv &\left( \left( \lnot A\vee C\right) \wedge \left( \lnot
+B\vee C\right) \right)   \TCItag{commutativity of $\vee $}
+\end{eqnarray}
+
+\begin{equation}
+\left( A\Rightarrow C\right) \vee \left( B\Rightarrow C\right) \equiv \left(
+\lnot A\vee C\right) \vee \left( \lnot B\vee C\right)   \tag{implication
+elimination}
 \end{equation}
 
-From i. we know that $\left( A\Rightarrow C\right) \vee \left( B\Rightarrow
-C\right) \equiv \left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right) 
-$
+So...
 
-So:$\left( \left( C\vee \lnot A\right) \wedge \left( C\vee \lnot B\right)
+\[
+\left( \left( C\vee \lnot A\right) \wedge \left( C\vee \lnot B\right)
+\right) \equiv \left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right) 
+\]
+
+So: $\left( \left( C\vee \lnot A\right) \wedge \left( C\vee \lnot B\right)
 \right) \equiv \left( \lnot A\vee C\right) \vee \left( \lnot B\vee C\right) $
 ?
 
 Answer:\ No. Because if $\lnot C$, $B$, $\lnot A$ then the LHS will be
-false, but the RHS\ will be true. 
+false, but the RHS\ will be true.
+
+\[
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+$A$ & $B$ & $C$ & $\left( \lnot A\wedge \lnot B\right) $ & $\left(
+A\Rightarrow C\right) $ & $\left( B\Rightarrow C\right) $ & $\left(
+A\Rightarrow C\right) \vee \left( B\Rightarrow C\right) $ & $\left( C\vee
+\left( \lnot A\wedge \lnot B\right) \right) $ \\ \hline
+0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 \\ \hline
+0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 \\ \hline
+0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 \\ \hline
+0 & 1 & 1 & 0 & 1 & 1 & 1 & 1 \\ \hline
+1 & 0 & 0 & 0 & 0 & 1 & 1 & 0 \\ \hline
+1 & 0 & 1 & 0 & 1 & 1 & 1 & 1 \\ \hline
+1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \hline
+\end{tabular}%
+\]
 
 \subsubsection{k. $\left( A\Leftrightarrow B\right) \wedge \left( \lnot
 A\vee B\right) $ is satisfiable.}
@@ -259,7 +286,7 @@ $A$ & $B$ & $C$ & $A\Leftrightarrow B$ & $\left( A\Leftrightarrow B\right)
 \end{tabular}%
 \]
 
-\bigskip 
+\bigskip
 
 \subsection{Page 281, Exercise 7.7}
 
@@ -284,7 +311,7 @@ is true?
 Because that is what I\ am going to answer.
 
 There exists $2^{n}$ unique possible models for a sentence sentence
-involving $n$ unique propositions. 
+involving $n$ unique propositions.
 
 $A\vee B$ has $2^{2}=\allowbreak 4$ unique models, three of which are models
 of $A\vee B$. Since we have $16$ unique models in total for our vocabulary,
@@ -363,8 +390,8 @@ Again, \textit{neither.}
 
 \subsubsection{d. $Smoke\vee Fire\vee \lnot Fire$}
 
-It's valid because $\left( Fire\vee \lnot Fire\right) $ is valid ($True\vee A
-$ is valid).
+It's valid because $\left( Fire\vee \lnot Fire\right) $ is valid ($True\vee
+A $ is valid).
 
 \subsubsection{e. $\left( \left( Smoke\wedge Heat\right) \Rightarrow
 Fire\right) \Leftrightarrow \left( \left( Smoke\Rightarrow Fire\right) \vee
@@ -376,7 +403,7 @@ Fire\right) \Leftrightarrow \left( \left( Smoke\Rightarrow Fire\right) \vee
 \]
 
 \begin{eqnarray}
-\left( \left( A\wedge C\right) \Rightarrow B\right)  &\equiv &\lnot \left(
+\left( \left( A\wedge C\right) \Rightarrow B\right) &\equiv &\lnot \left(
 A\wedge C\right) \vee B  \TCItag{implication elimination} \\
 \lnot \left( A\wedge C\right) \vee B &\equiv &\lnot A\vee \lnot C\vee B 
 \TCItag{De Morgan}
@@ -384,9 +411,9 @@ A\wedge C\right) \vee B  \TCItag{implication elimination} \\
 
 \begin{eqnarray}
 \left( \left( A\Rightarrow B\right) \vee \left( C\Rightarrow B\right)
-\right)  &\equiv &\left( \lnot A\vee B\right) \vee \left( \lnot C\vee
-B\right)   \TCItag{implication elimination} \\
-\left( \lnot A\vee B\right) \vee \left( \lnot C\vee B\right)  &\equiv &\lnot
+\right) &\equiv &\left( \lnot A\vee B\right) \vee \left( \lnot C\vee B\right)
+\TCItag{implication elimination} \\
+\left( \lnot A\vee B\right) \vee \left( \lnot C\vee B\right) &\equiv &\lnot
 A\vee \lnot C\vee B  \nonumber
 \end{eqnarray}
 
@@ -398,7 +425,7 @@ valid.
 \subsubsection{f. $Big\vee Dumb\vee \left( Big\Rightarrow Dumb\right) $}
 
 \begin{eqnarray}
-D\vee E\vee \left( D\Rightarrow E\right)  &\equiv &D\vee E\vee \lnot D\vee E
+D\vee E\vee \left( D\Rightarrow E\right) &\equiv &D\vee E\vee \lnot D\vee E 
 \TCItag{implication elimination} \\
 D\vee E\vee \lnot D\vee E &\equiv &D\vee \lnot D\vee E  \nonumber \\
 D\vee \lnot D\vee E &\equiv &True\vee E  \nonumber
@@ -421,8 +448,8 @@ $D$ & $E$ & $D\wedge E$ & $\left( D\wedge E\right) \vee \lnot E$ \\ \hline
 
 \textit{Neither.}
 
-\subsection{5. At this point, I\ notice I\ didn't have to do \textit{all}
-the parts of all the questions.}
+\subsection{At this point, I\ notice I\ didn't have to do \textit{all} the
+parts of all the questions.}
 
 "Consider a logical knowledge base with 100 variables, $A_{1},...,A_{100}$.
 This will have $Q=2^{100}$ possible models. For each logical sentence below,
@@ -450,7 +477,7 @@ Alternatively we could say that $A_{1}\vee A_{73}$ is satisfied by a three
 fourths of all the possible models.
 
 \[
-\dfrac{3}{4}\cdot 2^{100}=3\cdot 2^{98}
+\dfrac{3}{4}\cdot 2^{100}=3\cdot 2^{98} 
 \]
 
 I have, by the way, no idea if this is correct.
@@ -469,13 +496,13 @@ model where $\lnot A_{7}\wedge S_{b1}$ is true, and those other four in
 which $A_{7}$ is true)
 
 \[
-\dfrac{5}{2^{3}}\cdot 2^{100}=5\cdot 2^{97}
+\dfrac{5}{2^{3}}\cdot 2^{100}=5\cdot 2^{97} 
 \]
 
 \subsubsection{c. $A_{11}\rightarrow A_{22}$}
 
 \[
-3\cdot 2^{98}
+3\cdot 2^{98} 
 \]
 
 \section{Resolution in Propositional Logic}
@@ -508,12 +535,13 @@ A\Rightarrow \left( B\vee C\right) \equiv \lnot A\vee \left( B\vee C\right)
 \subsubsection{d. $\left( A\vee \lnot C\right) \Rightarrow B$}
 
 \begin{eqnarray}
-\left( \left( A\vee \lnot C\right) \Rightarrow B\right)  &\equiv &\lnot
+\left( \left( A\vee \lnot C\right) \Rightarrow B\right) &\equiv &\lnot
 \left( A\vee \lnot C\right) \vee B  \TCItag{implication elimination} \\
 \lnot \left( A\vee \lnot C\right) \vee B &\equiv &\left( \lnot A\wedge
 C\right) \vee B  \TCItag{De Morgan} \\
 \left( \lnot A\wedge C\right) \vee B &\equiv &\left( \left( B\vee \lnot
-A\right) \wedge \left( B\vee C\right) \right)   \TCItag{distributivity of
+A\right) \wedge \left( B\vee C\right) \right)  \TCItag{distributivity
+of
 $\vee $ over $\wedge $}
 \end{eqnarray}
 
@@ -528,6 +556,38 @@ $\vee $ over $\wedge $}
 \end{itemize}
 
 Use resolution to show that $KB\models \lnot E$
+
+(page 254)
+
+\begin{eqnarray}
+\left( \left( A\vee \lnot B\right) \Rightarrow \lnot C\right)  &\equiv
+&\lnot \left( A\vee \lnot B\right) \vee \lnot C  \TCItag{implication
+elimination} \\
+\lnot \left( A\vee \lnot B\right) \wedge \lnot C &\equiv &\left( \lnot
+A\wedge B\right) \vee \lnot C  \TCItag{De Morgan, double-negation
+elimination} \\
+\left( \lnot A\wedge B\right) \vee \lnot C &\equiv &\left( \lnot C\vee \lnot
+A\right) \wedge \left( \lnot C\vee B\right)   \TCItag{distributivity of
+$\vee $ over $\wedge $}
+\end{eqnarray}
+
+\bigskip 
+
+\begin{eqnarray}
+\left( \left( D\wedge E\right) \Rightarrow C\right)  &\equiv &\lnot \left(
+D\wedge E\right) \vee C  \TCItag{implication elimination} \\
+\lnot \left( D\wedge E\right) \vee C &\equiv &\lnot D\vee \lnot E\vee C 
+\TCItag{De Morgan}
+\end{eqnarray}
+
+$\lnot \left( A\vee \lnot B\right) =\left( \lnot A\wedge B\right) $
+
+So:
+
+\[
+\left( \left( A\vee \lnot B\right) \Rightarrow \lnot C\right) \wedge \left(
+\left( D\wedge E\right) \Rightarrow C\right) \wedge \left( A\wedge D\right) 
+\]
 
 You know this is really hard for me as I've never before seen a KB\
 displayed as a bulleted list. Or is each item a new KB?
@@ -555,21 +615,21 @@ Use these symbols to write the following assertions in first-order logic:
 \subsubsection{a. Emily is either a surgeon or a lawyer.}
 
 \[
-Occupation(Emily,\text{ }Surgeon)\vee Occupation(Emily,\text{ }Lawyer)
+Occupation(Emily,\text{ }Surgeon)\vee Occupation(Emily,\text{ }Lawyer) 
 \]
 
 \subsubsection{b. Joe is an actor, but he also holds another job.}
 
 \[
 Occupation(Joe,\text{ }Actor)\wedge Occupation(Joe,\text{ }Doctor\vee
-Surgeon\vee Lawyer)
+Surgeon\vee Lawyer) 
 \]
 
 \subsubsection{c. All surgeons are doctors}
 
 \[
 \forall p\left( Occupation(p,\text{ }Surgeon\right) \Rightarrow Occupation(p,%
-\text{ }Doctor)
+\text{ }Doctor) 
 \]
 
 \subsection{Page 319, Exercise 8.21}
@@ -619,8 +679,8 @@ every pair of socks will eventually be lost forever, using only the
 following vocabulary: $Key\left( x\right) $, $x$ is a key; $Sock\left(
 x\right) $, $x$ is a sock; $Pair\left( x,y\right) $, $x$ and $y$ are a pair; 
 $Now$, the current time; $Before\left( t_{1},t_{2}\right) $, time $t_{1}$
-comes before $t_{2};$ Lost$\left( x,t\right) $, object $x$ is lost at time $t
-$.
+comes before $t_{2};$ Lost$\left( x,t\right) $, object $x$ is lost at time $%
+t $.
 
 $\forall x$ $Key\left( x\right) \Rightarrow \exists t$ $Lost\left(
 x,t\right) $
@@ -693,10 +753,11 @@ $Green\left( x\right) $ ... $Drives\left( Linn,\text{\textit{Prius}}\right)
 
 $\theta =\{x/Linn,$ $y/$\textit{Prius}$\}$
 
-Did I\ mention that I\ have no idea what I\ am doing?
+Did I\ mention that I\ have no idea what I\ am doing? 
 %we write $\alpha \models \beta $ to mean that the sentence $\alpha $ entails
 %the sentence $\beta $. The formal defintion of entailment is this: $\alpha
 %\models \beta $ if and only if, in every model in which $\alpha $ is true, $%
 %\beta $ is also true. We can write: $\alpha \models \beta $ if and only if $%
 %M\left( \alpha \right) \subseteq M\left( \beta \right) $.
+
 \end{document}

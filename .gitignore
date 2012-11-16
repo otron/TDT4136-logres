@@ -7,3 +7,9 @@
 
 # Compiled source #
 *.class
+
+# sciwp stuff #
+*.bak
+*.aaa
+*.aux
+*.log
