@@ -11,7 +11,7 @@
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=Manual}
 %TCIDATA{Created=Monday, January 30, 2012 17:20:46}
-%TCIDATA{LastRevised=Friday, November 16, 2012 15:27:04}
+%TCIDATA{LastRevised=Friday, November 16, 2012 16:09:12}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
 %TCIDATA{CSTFile=40 LaTeX article.cst}
@@ -559,6 +559,8 @@ Use resolution to show that $KB\models \lnot E$
 
 (page 254)
 
+Right so first we need to convert the KB\ into CNF (Conjunctive Normal Form).
+
 \begin{eqnarray}
 \left( \left( A\vee \lnot B\right) \Rightarrow \lnot C\right)  &\equiv
 &\lnot \left( A\vee \lnot B\right) \vee \lnot C  \TCItag{implication
@@ -580,17 +582,26 @@ D\wedge E\right) \vee C  \TCItag{implication elimination} \\
 \TCItag{De Morgan}
 \end{eqnarray}
 
-$\lnot \left( A\vee \lnot B\right) =\left( \lnot A\wedge B\right) $
+Okay.\ Next up we apply the resolution rule to the clauses (a "clause is a
+disjunction of literals, which is to say a series of literals seperated by $%
+\vee $). Hm, I\ guess our clauses would be $\left( \lnot C\vee \lnot
+A\right) $, $\left( \lnot C\vee B\right) $, $\left( \lnot D\vee \lnot E\vee
+C\right) $, $A$, $D$ and $E$ (to show $KB\models \alpha $, we show that $%
+\left( KB\wedge \lnot \alpha \right) $ is unsatisfiable. We do this by
+proving a contradiction.)
 
-So:
+Wait what's the resolution rule? Oooh. I\ think I've got this now.
 
-\[
-\left( \left( A\vee \lnot B\right) \Rightarrow \lnot C\right) \wedge \left(
-\left( D\wedge E\right) \Rightarrow C\right) \wedge \left( A\wedge D\right) 
-\]
+$\dfrac{\left( \lnot C\vee \lnot A\right) ,\text{ }A}{\lnot C}$
 
-You know this is really hard for me as I've never before seen a KB\
-displayed as a bulleted list. Or is each item a new KB?
+$\dfrac{\left( \lnot D\vee \lnot E\vee C\right) ,\text{ }\lnot C}{\lnot
+D\vee \lnot E}$
+
+$\dfrac{D\text{, }\lnot D\vee \lnot E}{\lnot E}$
+
+$\dfrac{\lnot E\text{, }E}{\emptyset }$
+
+Yay? According to page 254 this means that $KB$ $\models \lnot E$
 
 \section{Representations in First-Order Logic}
 
